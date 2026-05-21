@@ -305,20 +305,6 @@
         const HIDAYA_DATABASE = {
             "applications": [
                 {
-  "title": "Zaduz Zaujaini",
-  "publisher": "HidayaBookshop",
-  "version": "1.0 ★",
-  "downloadType": "181.0 MB",
-  "downloadUrl": "https://drive.google.com/file/d/1jwzqIhZE3ZXLHbTL82RWsGT2pOLawcbj/view?usp=drive_link",
-  "icon": "Logo.png",
-  "screenshots": [
-    "https://drive.google.com/file/d/1O4SeZVGYMc3i3UHsiyL7gs29a49BpAm2/view?usp=drive_link",
-    "https://drive.google.com/file/d/1YE5CclYC39F82A3DTemQTPOo56X_96XW/view?usp=drive_link",
-    "https://drive.google.com/file/d/1h4DJmfvmoC6hGiH28S4AQ8wWACh6ll-A/view?usp=drive_link"
-  ],
-  "about": "Alhamdulillah Ala kulli halin"
-},
-                {
                     "title": "Zaduz Zawjaini",
                     "publisher": "HidayaBookshop",
                     "version": "5.0 ★",
@@ -326,7 +312,7 @@
                     "downloadUrl": "https://drive.google.com/file/d/1_YOUR_APK_GDRIVE_ID/view?usp=sharing",
                     "icon": "logo.png",
                     "screenshots": [
-                        "logo.png" // Pointing to your repository logo image by default
+                        "logo.png"
                     ],
                     "about": "Wannan application ne na musamman da aka gina shi domin saukakawa al'umma samun damar karanta littattafai da duba bayanai cikin sauki.\n\nAn gina shi da tsari na zamani wanda zai yi aiki lami lafiya akan kowace irin wayar Android ba tare da kawo tsaiko ko nauyi ba."
                 }
@@ -348,12 +334,11 @@
         const categoryTitle = document.getElementById('categoryTitle');
         const adminConsole = document.getElementById('adminConsole');
         
-        // Google Drive Image Source Converter Engine
+        // Universal Direct Image Fallback Link Translation Architecture
         function cleanDriveImageUrl(url) {
             if (!url) return '';
             let srcUrl = url.trim();
             
-            // Checks if it is a Google Drive share link and converts it dynamically
             if (srcUrl.includes('drive.google.com')) {
                 let fileId = '';
                 if (srcUrl.includes('id=')) {
@@ -362,10 +347,11 @@
                     fileId = srcUrl.split('/file/d/')[1].split('/')[0];
                 }
                 if (fileId) {
-                    return `https://thumbnailproduct.lh3.googleusercontent.com/d/${fileId}=w1000`;
+                    // Direct stream download layout bypasses security restrictions
+                    return `https://docs.google.com/uc?export=view&id=${fileId}`;
                 }
             }
-            return srcUrl; // Returns local path (e.g. logo.png) or standard link safely
+            return srcUrl;
         }
 
         document.addEventListener('DOMContentLoaded', () => {
