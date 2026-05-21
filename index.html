@@ -220,7 +220,7 @@
                         </div>
                     </div>
                     
-                    <a id="descDownloadBtn" href="" target="_blank" class="install-btn">Install Application</a>
+                    <a id="descDownloadBtn" href="" target="_blank" class="install-btn" download>Install Application</a>
                 </div>
             </div>
 
@@ -254,7 +254,7 @@
                 </div>
                 <div class="form-group">
                     <label>Application/Book Title:</label>
-                    <input type="text" id="assetTitle" placeholder="e.g., Currency Converter" required>
+                    <input type="text" id="assetTitle" placeholder="e.g., Zaduz Zawjaini" required>
                 </div>
                 <div class="form-group">
                     <label>Publisher Node Identity:</label>
@@ -263,24 +263,24 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>Version Release:</label>
-                        <input type="text" id="assetVersion" value="1.0" required>
+                        <input type="text" id="assetVersion" value="5.0" required>
                     </div>
                     <div class="form-group">
-                        <label>File Weight (e.g., 45.5 MB):</label>
-                        <input type="text" id="assetLinkType" value="12.0 MB" required>
+                        <label>File Weight (e.g., 68.0 MB):</label>
+                        <input type="text" id="assetLinkType" value="68.0 MB" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Google Drive Download Link (APK/PDF):</label>
-                    <input type="url" id="assetUrl" placeholder="https://drive.google.com/..." required>
+                    <label>Local APK/PDF File Name (e.g., Zaduz_Zawjaini.apk):</label>
+                    <input type="text" id="assetUrl" value="Zaduz_Zawjaini.apk" required>
                 </div>
                 <div class="form-group">
-                    <label>App Brand Icon URL (GDrive link or file name like logo.png):</label>
+                    <label>App Brand Icon File Name (e.g., logo.png):</label>
                     <input type="text" id="assetIcon" value="logo.png" required>
                 </div>
                 <div class="form-group">
-                    <label>Google Drive Screenshot Links (One URL per line):</label>
-                    <textarea id="assetScreenshots" placeholder="https://drive.google.com/file/d/..." required></textarea>
+                    <label>Local Screenshot File Names (One filename per line):</label>
+                    <textarea id="assetScreenshots" placeholder="screenshot1.jpg&#10;screenshot2.jpg" required></textarea>
                 </div>
                 <div class="form-group">
                     <label>About Document Description:</label>
@@ -300,33 +300,20 @@
 
     <script>
         // =========================================================================
-        // 💾 CENTRAL DATA STORE
+        // 💾 CENTRAL DATA STORE (Now streamlined for direct Repository Hosting)
         // =========================================================================
         const HIDAYA_DATABASE = {
             "applications": [
-                {
-  "title": "Zaduz Zaujaini",
-  "publisher": "HidayaBookshop",
-  "version": "1.0 ★",
-  "downloadType": "12.0 MB",
-  "downloadUrl": "https://drive.google.com/file/d/1jwzqIhZE3ZXLHbTL82RWsGT2pOLawcbj/view?usp=drive_link",
-  "icon": "https://drive.google.com/file/d/1spoTx5bHk2DXXNMkmM_O0uVdHpMF3Arq/view?usp=drive_link",
-  "screenshots": [
-    "https://drive.google.com/file/d/1h4DJmfvmoC6hGiH28S4AQ8wWACh6ll-A/view?usp=sharing",
-    "https://drive.google.com/file/d/1O4SeZVGYMc3i3UHsiyL7gs29a49BpAm2/view?usp=drive_link",
-    "https://drive.google.com/file/d/1YE5CclYC39F82A3DTemQTPOo56X_96XW/view?usp=drive_link"
-  ],
-  "about": "Alhamdulillahi Rabbil Alamin"
-},
                 {
                     "title": "Zaduz Zawjaini",
                     "publisher": "HidayaBookshop",
                     "version": "5.0 ★",
                     "downloadType": "68.0 MB",
-                    "downloadUrl": "https://drive.google.com/file/d/1_YOUR_APK_GDRIVE_ID/view?usp=sharing",
-                    "icon": "logo.png",
+                    "downloadUrl": "Zaduz_Zawjaini.apk", // Safe, local APK tracking
+                    "icon": "logo.png",                  // Safe, local App Icon image
                     "screenshots": [
-                        "logo.png"
+                        "screenshot1.jpg",               // Upload these directly to your GitHub folder!
+                        "screenshot2.jpg"
                     ],
                     "about": "Wannan application ne na musamman da aka gina shi domin saukakawa al'umma samun damar karanta littattafai da duba bayanai cikin sauki.\n\nAn gina shi da tsari na zamani wanda zai yi aiki lami lafiya akan kowace irin wayar Android ba tare da kawo tsaiko ko nauyi ba."
                 }
@@ -336,7 +323,7 @@
         };
 
         // =========================================================================
-        // ⚡ ACTIVE PROCESSING ARCHITECTURE & LINK TRANSLATION LAYER
+        // ⚡ ACTIVE PROCESSING ARCHITECTURE
         // =========================================================================
         let currentTab = 'applications';
 
@@ -347,31 +334,10 @@
         const emptyState = document.getElementById('emptyState');
         const categoryTitle = document.getElementById('categoryTitle');
         const adminConsole = document.getElementById('adminConsole');
-        
-        // Universal Direct Image Fallback Link Translation Architecture
-        function cleanDriveImageUrl(url) {
-            if (!url) return '';
-            let srcUrl = url.trim();
-            
-            if (srcUrl.includes('drive.google.com')) {
-                let fileId = '';
-                if (srcUrl.includes('id=')) {
-                    fileId = srcUrl.split('id=')[1].split('&')[0];
-                } else if (srcUrl.includes('/file/d/')) {
-                    fileId = srcUrl.split('/file/d/')[1].split('/')[0];
-                }
-                if (fileId) {
-                    // Direct stream download layout bypasses security restrictions
-                    return `https://docs.google.com/uc?export=view&id=${fileId}`;
-                }
-            }
-            return srcUrl;
-        }
 
         document.addEventListener('DOMContentLoaded', () => {
             renderProducts();
             
-            // Password Secured Gate Trigger
             document.getElementById('toggleConsoleBtn').addEventListener('click', () => {
                 const securityToken = prompt("Enter Administration Node Security Key:");
                 if (securityToken === "admin123") {
@@ -414,10 +380,8 @@
                 card.className = 'product-card';
                 card.onclick = () => showDescriptionView(currentTab, index);
                 
-                let processedIcon = cleanDriveImageUrl(item.icon);
-                
                 card.innerHTML = `
-                    <img src="${processedIcon}" alt="${item.title}" class="product-icon" onerror="this.src='https://via.placeholder.com/80?text=App'">
+                    <img src="${item.icon}" alt="${item.title}" class="product-icon" onerror="this.src='https://via.placeholder.com/80?text=App'">
                     <div class="product-details">
                         <h3>${item.title}</h3>
                         <p class="publisher">${item.publisher}</p>
@@ -435,7 +399,7 @@
         function showDescriptionView(category, index) {
             const item = HIDAYA_DATABASE[category][index];
             
-            document.getElementById('descIcon').src = cleanDriveImageUrl(item.icon);
+            document.getElementById('descIcon').src = item.icon;
             document.getElementById('descTitle').innerText = item.title;
             document.getElementById('descPublisher').innerText = item.publisher;
             document.getElementById('descVersion').innerText = item.version;
@@ -446,11 +410,11 @@
             const gallery = document.getElementById('descGallery');
             gallery.innerHTML = '';
             if(item.screenshots && item.screenshots.length > 0) {
-                item.screenshots.forEach(url => {
-                    if(url.trim()){
+                item.screenshots.forEach(fileName => {
+                    if(fileName.trim()){
                         const img = document.createElement('img');
                         img.className = 'preview-img';
-                        img.src = cleanDriveImageUrl(url);
+                        img.src = fileName.trim();
                         img.onerror = function() { this.src='https://via.placeholder.com/220x380?text=Preview+Media'; };
                         gallery.appendChild(img);
                     }
@@ -470,7 +434,6 @@
             renderProducts();
         }
 
-        // Processing custom data fragment compilers
         document.getElementById('assetForm').addEventListener('submit', (e) => {
             e.preventDefault();
 
