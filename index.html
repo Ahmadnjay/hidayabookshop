@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<html lang="en"><head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hidaya Bookshop - Digital Hub</title>
@@ -20,7 +20,7 @@
             background-color: #ffffff;
         }
 
-        /* NAVBAR DESIGN ELEMENT */
+        /* NAVBAR */
         .navbar {
             display: flex;
             align-items: center;
@@ -29,7 +29,7 @@
             border-bottom: 1px solid var(--border-color);
             background-color: #ffffff;
         }
-        .logo-area { display: flex; align-items: center; gap: 8px; }
+        .logo-area { display: flex; align-items: center; gap: 8px; cursor: pointer; }
         .logo-icon { color: #ea4335; font-size: 24px; }
         .navbar h1 { font-size: 20px; margin: 0; font-weight: 600; color: #444; }
         .brand-green { color: var(--brand-green); }
@@ -51,7 +51,7 @@
             color: #1a73e8;
         }
 
-        /* NAVIGATION INTERFACES */
+        /* CATEGORY TABS */
         .category-tabs {
             display: flex;
             gap: 32px;
@@ -73,11 +73,12 @@
             border-bottom-color: var(--brand-green);
         }
 
-        /* CARDS VIEW AND LAYOUT GRID MAPS */
+        /* MAIN CONTAINER & GRID */
         .main-container { padding: 32px 24px; }
         .main-container h2 { font-size: 22px; font-weight: 400; margin-bottom: 24px; }
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
 
+        /* CATALOG CARD */
         .product-card {
             display: flex;
             gap: 16px;
@@ -85,47 +86,58 @@
             border: 1px solid var(--border-color);
             border-radius: 12px;
             background: #ffffff;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .product-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
         .product-icon { width: 80px; height: 80px; border-radius: 16px; object-fit: cover; }
-        .product-details h3 { margin: 0 0 4px 0; font-size: 18px; }
+        .product-details h3 { margin: 0 0 4px 0; font-size: 18px; color: #111; }
         .publisher { margin: 0; color: var(--brand-green); font-size: 14px; font-weight: 500; }
         .meta-info { margin: 4px 0 12px 0; color: var(--text-light); font-size: 12px; }
 
-        .badge-row { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+        .badge-row { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
         .badge { padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
         .badge.version { background: #e8f0fe; color: #1a73e8; }
         .badge.link-type { background: #fef7e0; color: #b06000; }
         .badge.secure { background: #e6f4ea; color: #137333; }
 
+        /* PRODUCT DESCRIPTION VIEW LAYOUT */
+        .back-btn {
+            background: none; border: none; color: var(--brand-green);
+            font-size: 16px; font-weight: 500; cursor: pointer;
+            display: flex; align-items: center; gap: 8px; margin-bottom: 24px;
+            padding: 0;
+        }
+        .details-view-header { display: flex; gap: 32px; align-items: flex-start; margin-bottom: 32px; }
+        .details-icon { width: 150px; height: 150px; border-radius: 28px; object-fit: cover; border: 1px solid var(--border-color); }
+        .details-meta-box h2 { font-size: 32px; font-weight: 600; margin: 0 0 8px 0; }
+        .details-metrics { display: flex; gap: 48px; margin: 24px 0; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 16px 0; }
+        .metric-item { display: flex; flex-direction: column; gap: 4px; }
+        .metric-val { font-size: 18px; font-weight: 600; color: #202124; text-align: center; }
+        .metric-lbl { font-size: 12px; color: var(--text-light); }
+        
         .install-btn {
-            display: inline-block;
-            padding: 10px 24px;
-            background-color: var(--brand-green);
-            color: white;
-            text-decoration: none;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 500;
-            text-align: center;
+            display: inline-block; padding: 12px 40px;
+            background-color: var(--brand-green); color: white;
+            text-decoration: none; border-radius: 24px;
+            font-size: 15px; font-weight: 500; text-align: center;
+            border: none; cursor: pointer;
         }
 
-        /* EMPTY STATE STYLE */
-        .empty-state { text-align: center; padding: 60px 0; color: var(--text-light); }
-        .package-icon { font-size: 48px; margin-bottom: 16px; }
-        .hidden { display: none !important; }
+        /* PREVIEW MEDIA GALLERY */
+        .preview-section h3 { font-size: 18px; font-weight: 500; margin-bottom: 16px; }
+        .preview-gallery { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 16px; }
+        .preview-img { height: 320px; border-radius: 12px; border: 1px solid var(--border-color); object-fit: cover; }
 
-        /* MODAL CONFIGURATIONS FOR DEVELOPER DASHBOARD */
+        /* DEVELOPER CONSOLE MODAL */
         .admin-modal {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
-            display: flex; align-items: center; justify-content: center;
-            z-index: 1000;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000;
         }
-        .console-content {
-            background: white; padding: 24px; border-radius: 12px;
-            width: 500px; max-height: 90vh; overflow-y: auto;
-        }
+        .console-content { background: white; padding: 24px; border-radius: 12px; width: 500px; max-height: 90vh; overflow-y: auto; }
         .console-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
         .close-btn { background: none; border: none; font-size: 28px; cursor: pointer; }
         .form-group { margin-bottom: 16px; display: flex; flex-direction: column; gap: 6px; }
@@ -133,110 +145,139 @@
         .form-row .form-group { flex: 1; }
         .form-group input, .form-group select { padding: 10px; border: 1px solid var(--border-color); border-radius: 6px; }
         .generate-btn { width: 100%; padding: 12px; background: #202124; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; }
-
         .output-area { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color); }
-        .output-area textarea { width: 100%; height: 150px; font-family: monospace; font-size: 11px; padding: 10px; border-radius: 6px; box-sizing: border-box; resize: none; }
+        .output-area textarea { width: 100%; height: 120px; font-family: monospace; font-size: 11px; padding: 10px; border-radius: 6px; box-sizing: border-box; resize: none; }
         .copy-btn { margin-top: 10px; padding: 8px 16px; background: var(--brand-green); color: white; border: none; border-radius: 4px; cursor: pointer; }
+
+        .empty-state { text-align: center; padding: 60px 0; color: var(--text-light); }
+        .package-icon { font-size: 48px; margin-bottom: 16px; }
+        .hidden { display: none !important; }
+        
+        @media (max-width: 600px) {
+            .search-bar { display: none; }
+            .details-view-header { flex-direction: column; align-items: center; text-align: center; gap: 16px; }
+            .details-metrics { justify-content: space-around; width: 100%; }
+        }
     </style>
 </head>
 <body>
 
     <header class="navbar">
-        <div class="logo-area">
+        <div class="logo-area" onclick="showCatalogView()">
             <span class="logo-icon">▶</span>
             <h1>Hidaya <span class="brand-green">Bookshop</span></h1>
         </div>
         <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Search bookstore digital software, apps, and utilities...">
+            <input type="text" placeholder="Search bookstore digital software, apps, and utilities...">
         </div>
         <button id="toggleConsoleBtn" class="console-btn">Developer Console</button>
     </header>
 
-    <nav class="category-tabs">
+    <nav id="categoryTabs" class="category-tabs">
         <button class="tab-link active" onclick="switchTab('applications')">Applications</button>
-        <button class="tab-link" onclick="switchTab('ebooks')">E-Books &amp; Materials</button>
+        <button class="tab-link" onclick="switchTab('ebooks')">E-Books & Materials</button>
         <button class="tab-link" onclick="switchTab('systems')">Management Systems</button>
     </nav>
 
     <main class="main-container">
-        <h2 id="categoryTitle">Published Ecosystem Distributions</h2>
-        
-        <div id="productGrid" class="product-grid"><div class="product-card">
-                    <img src="Zadu.png" alt="Zaduz Zaujaini" class="product-icon" onerror="this.src='https://via.placeholder.com/80?text=App'">
-                    <div class="product-details">
-                        <h3>Zaduz Zaujaini</h3>
-                        <p class="publisher">HidayaBookshop</p>
-                        <p class="meta-info">Node: Verified Secure Asset Base</p>
-                        <div class="badge-row">
-                            <span class="badge version">5.0 ★</span>
-                            <span class="badge link-type">☁ GDrive Link</span>
-                            <span class="badge secure">✔ Secure</span>
-                        </div>
-                        <a href="https://drive.google.com/file/d/1jwzqIhZE3ZXLHbTL82RWsGT2pOLawcbj/view?usp=drive_link" target="_blank" class="install-btn">Install Application</a>
-                    </div>
-                </div></div>
+        <div id="catalogView">
+            <h2 id="categoryTitle">Published Ecosystem Distributions</h2>
+            <div id="productGrid" class="product-grid"></div>
+            <div id="emptyState" class="empty-state hidden">
+                <div class="package-icon">📦</div>
+                <p>No software packages found tracking search variables inside this collection.</p>
+            </div>
+        </div>
 
-        <div id="emptyState" class="empty-state hidden">
-            <div class="package-icon">📦</div>
-            <p>No software packages found tracking search variables inside this collection.</p>
+        <div id="descriptionView" class="hidden">
+            <button class="back-btn" onclick="showCatalogView()">← Back to Hub Catalog</button>
+            
+            <div class="details-view-header">
+                <img id="descIcon" src="" alt="App Icon" class="details-icon">
+                <div class="details-meta-box">
+                    <h2 id="descTitle"></h2>
+                    <p id="descPublisher" class="publisher"></p>
+                    <p class="meta-info">Publisher Node: Verified Secure Asset Base</p>
+                    
+                    <div class="details-metrics">
+                        <div class="metric-item">
+                            <span id="descVersion" class="metric-val"></span>
+                            <span class="metric-lbl">Official Release</span>
+                        </div>
+                        <div class="metric-item">
+                            <span id="descType" class="metric-val"></span>
+                            <span class="metric-lbl">Storage Node</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-val" style="color:#137333;">Secure</span>
+                            <span class="metric-lbl">Verified Link</span>
+                        </div>
+                    </div>
+                    
+                    <a id="descDownloadBtn" href="" target="_blank" class="install-btn">Install Application</a>
+                </div>
+            </div>
+
+            <div class="preview-section">
+                <h3>Application Preview Media</h3>
+                <div id="descGallery" class="preview-gallery"></div>
+            </div>
         </div>
     </main>
 
-    <div id="adminConsole" class="admin-modal">
+    <div id="adminConsole" class="admin-modal hidden">
         <div class="console-content">
             <div class="console-header">
                 <h2>Hidaya Asset Hub Developer Console</h2>
-                <button id="closeConsoleBtn" class="close-btn">×</button>
+                <button id="closeConsoleBtn" class="close-btn">&times;</button>
             </div>
             
             <form id="assetForm">
                 <div class="form-group">
                     <label>Collection Target:</label>
-                    <select id="assetCategory" required="">
+                    <select id="assetCategory" required>
                         <option value="applications">Applications</option>
-                        <option value="ebooks">E-Books &amp; Materials</option>
+                        <option value="ebooks">E-Books & Materials</option>
                         <option value="systems">Management Systems</option>
                     </select>
                 </div>
-
                 <div class="form-group">
-                    <label>Application/Asset Title:</label>
-                    <input type="text" id="assetTitle" placeholder="e.g., Zaduz Zawjaini" required="">
+                    <label>Asset Title:</label>
+                    <input type="text" id="assetTitle" placeholder="e.g., Zaduz Zawjaini" required>
                 </div>
-
                 <div class="form-group">
-                    <label>Publisher Node Label:</label>
-                    <input type="text" id="assetPublisher" value="HidayaBookshop" required="">
+                    <label>Publisher Label:</label>
+                    <input type="text" id="assetPublisher" value="HidayaBookshop" required>
                 </div>
-
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Distribution Version:</label>
-                        <input type="text" id="assetVersion" value="5.0" required="">
+                        <label>Version:</label>
+                        <input type="text" id="assetVersion" value="5.0" required>
                     </div>
                     <div class="form-group">
-                        <label>Storage Node Type:</label>
-                        <input type="text" id="assetLinkType" value="GDrive Link" required="">
+                        <label>Storage Node Metric:</label>
+                        <input type="text" id="assetLinkType" value="68.0 MB" placeholder="e.g., GDrive Link or 68.0 MB" required>
                     </div>
                 </div>
-
                 <div class="form-group">
-                    <label>Secure Storage URL Asset Link:</label>
-                    <input type="url" id="assetUrl" placeholder="https://drive.google.com/..." required="">
+                    <label>Secure Asset URL:</label>
+                    <input type="url" id="assetUrl" placeholder="https://drive.google.com/..." required>
                 </div>
-
                 <div class="form-group">
-                    <label>Asset Icon Local Path Name:</label>
-                    <input type="text" id="assetIcon" placeholder="e.g., logo.png" required="">
+                    <label>Icon File Name:</label>
+                    <input type="text" id="assetIcon" value="logo.png" required>
                 </div>
-
+                <div class="form-group">
+                    <label>Screenshots (Comma Separated File Names):</label>
+                    <input type="text" id="assetScreenshots" placeholder="screen1.jpg, screen2.jpg, screen3.jpg" value="screen1.jpg, screen2.jpg, screen3.jpg">
+                </div>
                 <button type="submit" class="generate-btn">Generate Deployment Code</button>
             </form>
 
             <div id="outputArea" class="output-area hidden">
                 <h3>📦 Generated Master File Code</h3>
-                <p>Copy all code below, completely delete everything in your <code>index.html</code> file on GitHub, and replace it with this to save your items permanently.</p>
-                <textarea id="codeOutput" readonly=""></textarea>
+                <p>Copy all code below, paste over everything in your <code>index.html</code> file on GitHub, and commit.</p>
+                <textarea id="codeOutput" readonly></textarea>
                 <button onclick="copyDeploymentCode()" class="copy-btn">Copy New Codebase</button>
             </div>
         </div>
@@ -244,45 +285,44 @@
 
     <script>
         // ==========================================
-        // 💾 CORE MASTER DATABASE DIRECTORY (EDIT HERE DIRECTLY OR VIA CONSOLE)
+        // 💾 PRODUCTION MASTER DATABASE DIRECTORY
         // ==========================================
         const HIDAYA_DATABASE = {
-          "applications": [
-                    {
-                              "title": "Zaduz Zaujaini",
-                              "publisher": "HidayaBookshop",
-                              "version": "5.0",
-                              "downloadType": "GDrive Link",
-                              "downloadUrl": "https://drive.google.com/file/d/1jwzqIhZE3ZXLHbTL82RWsGT2pOLawcbj/view?usp=drive_link",
-                              "icon": "Zadu.png"
-                    }
-          ],
-          "ebooks": [],
-          "systems": []
-};
+            "applications": [
+                {
+                    "title": "Zaduz Zawjaini",
+                    "publisher": "HidayaBookshop",
+                    "version": "5.0 ★",
+                    "downloadType": "68.0 MB",
+                    "downloadUrl": "https://drive.google.com/",
+                    "icon": "logo.png",
+                    "screenshots": ["screen1.jpg", "screen2.jpg", "screen3.jpg"]
+                }
+            ],
+            "ebooks": [],
+            "systems": []
+        };
 
         // ==========================================
         // ⚡ APPLICATION MANAGEMENT ENGINE
         // ==========================================
         let currentTab = 'applications';
 
+        const catalogView = document.getElementById('catalogView');
+        const descriptionView = document.getElementById('descriptionView');
+        const categoryTabs = document.getElementById('categoryTabs');
         const productGrid = document.getElementById('productGrid');
         const emptyState = document.getElementById('emptyState');
         const categoryTitle = document.getElementById('categoryTitle');
         const adminConsole = document.getElementById('adminConsole');
-        const toggleConsoleBtn = document.getElementById('toggleConsoleBtn');
-        const closeConsoleBtn = document.getElementById('closeConsoleBtn');
-        const assetForm = document.getElementById('assetForm');
-        const outputArea = document.getElementById('outputArea');
-        const codeOutput = document.getElementById('codeOutput');
-
+        
         document.addEventListener('DOMContentLoaded', () => {
             renderProducts();
             
-            toggleConsoleBtn.addEventListener('click', () => adminConsole.classList.remove('hidden'));
-            closeConsoleBtn.addEventListener('click', () => {
+            document.getElementById('toggleConsoleBtn').addEventListener('click', () => adminConsole.classList.remove('hidden'));
+            document.getElementById('closeConsoleBtn').addEventListener('click', () => {
                 adminConsole.classList.add('hidden');
-                outputArea.classList.add('hidden');
+                document.getElementById('outputArea').classList.add('hidden');
             });
         });
 
@@ -295,7 +335,7 @@
             if(tabName === 'ebooks') categoryTitle.innerText = "E-Books & Academic Reference Materials";
             if(tabName === 'systems') categoryTitle.innerText = "Enterprise Architecture Management Systems";
             
-            renderProducts();
+            showCatalogView();
         }
 
         function renderProducts() {
@@ -306,67 +346,100 @@
                 emptyState.classList.remove('hidden');
                 return;
             }
-
             emptyState.classList.add('hidden');
 
-            items.forEach(item => {
+            items.forEach((item, index) => {
                 const card = document.createElement('div');
                 card.className = 'product-card';
+                card.onclick = () => showDescriptionView(currentTab, index);
                 card.innerHTML = `
                     <img src="${item.icon}" alt="${item.title}" class="product-icon" onerror="this.src='https://via.placeholder.com/80?text=App'">
                     <div class="product-details">
                         <h3>${item.title}</h3>
                         <p class="publisher">${item.publisher}</p>
-                        <p class="meta-info">Node: Verified Secure Asset Base</p>
+                        <p class="meta-info">Node: Click to view details</p>
                         <div class="badge-row">
-                            <span class="badge version">${item.version} ★</span>
+                            <span class="badge version">${item.version}</span>
                             <span class="badge link-type">☁ ${item.downloadType}</span>
-                            <span class="badge secure">✔ Secure</span>
                         </div>
-                        <a href="${item.downloadUrl}" target="_blank" class="install-btn">Install Application</a>
                     </div>
                 `;
                 productGrid.appendChild(card);
             });
         }
 
+        // View State Navigation (The 2-Page Flow)
+        function showDescriptionView(category, index) {
+            const item = HIDAYA_DATABASE[category][index];
+            
+            document.getElementById('descIcon').src = item.icon;
+            document.getElementById('descTitle').innerText = item.title;
+            document.getElementById('descPublisher').innerText = item.publisher;
+            document.getElementById('descVersion').innerText = item.version;
+            document.getElementById('descType').innerText = item.downloadType;
+            document.getElementById('descDownloadBtn').href = item.downloadUrl;
+            
+            // Render screenshots gallery
+            const gallery = document.getElementById('descGallery');
+            gallery.innerHTML = '';
+            if(item.screenshots && item.screenshots.length > 0) {
+                item.screenshots.forEach(src => {
+                    const img = document.createElement('img');
+                    img.className = 'preview-img';
+                    img.src = src.trim();
+                    img.onerror = () => this.src='https://via.placeholder.com/180x320?text=Screenshot';
+                    gallery.appendChild(img);
+                });
+            }
+
+            catalogView.classList.add('hidden');
+            categoryTabs.classList.add('hidden');
+            descriptionView.classList.remove('hidden');
+            window.scrollTo(0,0);
+        }
+
+        function showCatalogView() {
+            descriptionView.classList.add('hidden');
+            catalogView.classList.remove('hidden');
+            categoryTabs.classList.remove('hidden');
+            renderProducts();
+        }
+
         // Processing deployment generation inside Developer Dashboard
-        assetForm.addEventListener('submit', (e) => {
+        document.getElementById('assetForm').addEventListener('submit', (e) => {
             e.preventDefault();
 
             const category = document.getElementById('assetCategory').value;
+            const screenshotInput = document.getElementById('assetScreenshots').value;
+            const screenshotArray = screenshotInput ? screenshotInput.split(',') : [];
+
             const newAsset = {
                 title: document.getElementById('assetTitle').value,
                 publisher: document.getElementById('assetPublisher').value,
-                version: document.getElementById('assetVersion').value,
+                version: document.getElementById('assetVersion').value + " ★",
                 downloadType: document.getElementById('assetLinkType').value,
                 downloadUrl: document.getElementById('assetUrl').value,
-                icon: document.getElementById('assetIcon').value
+                icon: document.getElementById('assetIcon').value,
+                screenshots: screenshotArray
             };
 
             HIDAYA_DATABASE[category].push(newAsset);
-            renderProducts();
+            showCatalogView();
 
-            // Read absolute page code structure up to the database signature
             const documentHtml = document.documentElement.outerHTML;
-            
-            // Recompile the file cleanly inserting the new master structural array
             const databaseString = `const HIDAYA_DATABASE = ${JSON.stringify(HIDAYA_DATABASE, null, 12)};`;
-            
-            // Regex match replacement to swap core directory array variables dynamically
             const updatedCode = documentHtml.replace(/const HIDAYA_DATABASE = \{[\s\S]*?\};/, databaseString);
             
-            codeOutput.value = "<!DOCTYPE html>\n<html lang=\"en\">\n" + updatedCode + "\n</html>";
-            outputArea.classList.remove('hidden');
+            document.getElementById('codeOutput').value = "<!DOCTYPE html>\n<html lang=\"en\">\n" + updatedCode + "\n</html>";
+            document.getElementById('outputArea').classList.remove('hidden');
         });
 
         function copyDeploymentCode() {
+            const codeOutput = document.getElementById('codeOutput');
             codeOutput.select();
             document.execCommand('copy');
-            alert('New master codebase copied successfully! Open your index.html file on GitHub, select everything, paste this over it, and commit.');
+            alert('New master codebase copied successfully! Replace index.html on GitHub.');
         }
     </script>
-
-
-</body></html>
+</body>
 </html>
