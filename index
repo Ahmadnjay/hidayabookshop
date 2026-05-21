@@ -111,8 +111,8 @@
             font-weight: 500;
             color: #5f6368;
             font-size: 14px;
-            display: none;
         }
+        .contact-btn:hover { background: var(--bg-light); color: var(--brand-green); }
         
         .console-btn {
             padding: 9px 16px;
@@ -229,7 +229,7 @@
             <input type="text" placeholder="Search bookstore digital software, apps, and utilities...">
         </div>
         <div class="nav-actions">
-            <button id="toggleContactBtn" class="contact-btn">Contact Us</button>
+            <button id="toggleContactBtn" class="contact-btn" style="display:none;">Contact Us</button>
             <button id="toggleConsoleBtn" class="console-btn">Developer Console</button>
         </div>
     </header>
@@ -434,17 +434,14 @@
             document.getElementById('screenshotsFileContainer').className = screenMethod === 'local' ? 'form-group' : 'form-group hidden';
         }
 
-        // IMPROVED GOOGLE DRIVE CLEANER (SUPPORTING trailing parameter structures like ?usp=drive_link)
+        // AUTOMATED GOOGLE DRIVE RENDERING FORMATTER
         function cleanDriveImageUrl(url) {
             if (!url) return '';
             let srcUrl = url.trim();
             if (srcUrl.includes('drive.google.com')) {
                 let fileId = '';
-                if (srcUrl.includes('id=')) {
-                    fileId = srcUrl.split('id=')[1].split('&')[0];
-                } else if (srcUrl.includes('/file/d/')) {
-                    fileId = srcUrl.split('/file/d/')[1].split('/')[0].split('?')[0];
-                }
+                if (srcUrl.includes('id=')) fileId = srcUrl.split('id=')[1].split('&')[0];
+                else if (srcUrl.includes('/file/d/')) fileId = srcUrl.split('/file/d/')[1].split('/')[0];
                 if (fileId) return `https://docs.google.com/uc?export=view&id=${fileId}`;
             }
             return srcUrl;
