@@ -111,8 +111,8 @@
             font-weight: 500;
             color: #5f6368;
             font-size: 14px;
+            display: none;
         }
-        .contact-btn:hover { background: var(--bg-light); color: var(--brand-green); }
         
         .console-btn {
             padding: 9px 16px;
@@ -434,7 +434,7 @@
             document.getElementById('screenshotsFileContainer').className = screenMethod === 'local' ? 'form-group' : 'form-group hidden';
         }
 
-        // GOOGLE DRIVE CLEANER PARSER (Strips trailing parameters cleanly)
+        // IMPROVED GOOGLE DRIVE CLEANER (SUPPORTING trailing parameter structures like ?usp=drive_link)
         function cleanDriveImageUrl(url) {
             if (!url) return '';
             let srcUrl = url.trim();
@@ -528,20 +528,20 @@
         document.getElementById('assetForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             try {
-                // Compile File Download Link
+                // Parse Download URL
                 const urlMethod = document.getElementById('assetUrlMethod').value;
                 let finalDownloadUrl = "";
                 if (urlMethod === 'url') finalDownloadUrl = cleanDriveImageUrl(document.getElementById('assetUrlText').value);
                 else if (urlMethod === 'github') finalDownloadUrl = document.getElementById('assetGithubText').value;
                 else finalDownloadUrl = document.getElementById('assetUrlFile').files.length > 0 ? await readAsDataURL(document.getElementById('assetUrlFile').files[0]) : "";
 
-                // Compile Icon Link
+                // Parse Brand Icon Image
                 const iconMethod = document.getElementById('assetIconMethod').value;
                 let finalIcon = "";
                 if (iconMethod === 'url') finalIcon = cleanDriveImageUrl(document.getElementById('assetIconText').value);
                 else finalIcon = document.getElementById('assetIconFile').files.length > 0 ? await readAsDataURL(document.getElementById('assetIconFile').files[0]) : "Zadu.png";
 
-                // Compile Gallery Media Screenshots
+                // Parse Screenshots Gallery
                 const screenMethod = document.getElementById('assetScreenshotsMethod').value;
                 let finalScreenshots = [];
                 if (screenMethod === 'url') {
