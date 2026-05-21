@@ -18,53 +18,136 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: var(--text-dark);
             background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
-        /* NAVBAR */
+        /* NAVBAR CONTAINER */
         .navbar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px 24px;
+            padding: 14px 24px;
             border-bottom: 1px solid var(--border-color);
             background-color: #ffffff;
         }
-        .logo-area { display: flex; align-items: center; gap: 8px; cursor: pointer; }
-        .logo-icon { color: #ea4335; font-size: 24px; }
-        .navbar h1 { font-size: 20px; margin: 0; font-weight: 600; color: #444; }
-        .brand-green { color: var(--brand-green); }
+        
+        /* EXACT LOGO AREA FROM SCREENSHOT */
+        .logo-area { 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            cursor: pointer; 
+            user-select: none;
+        }
+        
+        /* EXACT PLAYSTORE TRICOLOR GEOMETRIC EMBLEM via CSS */
+        .playstore-logo {
+            width: 18px;
+            height: 20px;
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            clip-path: polygon(0% 0%, 100% 50%, 0% 100%, 0% 15%);
+            border-radius: 1px;
+        }
+        .playstore-logo::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, #ff4b2b, #ff416c);
+            clip-path: polygon(0% 0%, 100% 50%, 0% 50%);
+        }
+        .playstore-logo::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, #f9d423, #ff4e50);
+            clip-path: polygon(0% 100%, 100% 50%, 0% 50%);
+        }
+
+        .navbar h1 { 
+            font-size: 22px; 
+            margin: 0; 
+            font-weight: 500; 
+            color: #202124;
+            letter-spacing: -0.2px;
+        }
+        .brand-green { color: var(--brand-green); font-weight: 600; margin-left: 2px;}
+        
+        /* CENTER SEARCH FIELD */
+        .search-bar {
+            position: relative;
+        }
         .search-bar input {
-            width: 450px;
-            padding: 10px 16px;
-            border: 1px solid var(--border-color);
+            width: 460px;
+            padding: 12px 16px 12px 42px;
+            border: 1px solid transparent;
             border-radius: 8px;
-            background-color: var(--bg-light);
+            background-color: #f1f3f4;
+            font-size: 15px;
+            color: #3c4043;
+            transition: background-color 0.2s, box-shadow 0.2s;
+        }
+        .search-bar input:focus {
+            background-color: #ffffff;
+            border-color: transparent;
+            box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+            outline: none;
+        }
+        .search-bar::before {
+            content: '🔍';
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            color: var(--text-light);
+            opacity: 0.7;
+        }
+        
+        /* ACTION ROW ELEMENTS */
+        .nav-actions { display: flex; align-items: center; gap: 12px; }
+        .contact-btn {
+            padding: 9px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: #ffffff;
+            cursor: pointer;
+            font-weight: 500;
+            color: #5f6368;
             font-size: 14px;
         }
+        .contact-btn:hover { background: var(--bg-light); color: var(--brand-green); }
+        
         .console-btn {
-            padding: 8px 16px;
+            padding: 9px 16px;
             border: 1px solid #dadce0;
             border-radius: 6px;
-            background: transparent;
+            background: #ffffff;
             cursor: pointer;
             font-weight: 500;
             color: #1a73e8;
+            font-size: 14px;
         }
+        .console-btn:hover { background: #f8fafd; }
 
-        /* CATEGORY TABS */
+        /* CATEGORY NAVIGATION LINKS */
         .category-tabs {
             display: flex;
-            gap: 32px;
+            gap: 24px;
             padding: 0 24px;
             border-bottom: 1px solid var(--border-color);
+            background: #ffffff;
         }
         .tab-link {
             background: none;
             border: none;
-            padding: 16px 0;
+            padding: 14px 4px;
             font-size: 14px;
             font-weight: 500;
-            color: var(--text-light);
+            color: #5f6368;
             cursor: pointer;
             border-bottom: 3px solid transparent;
         }
@@ -73,41 +156,41 @@
             border-bottom-color: var(--brand-green);
         }
 
-        /* CATALOG GRID Layout */
-        .main-container { padding: 32px 24px; }
-        .main-container h2 { font-size: 22px; font-weight: 400; margin-bottom: 24px; }
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+        /* CORE VIEWPORT CONTENT WRAPPER */
+        .main-container { 
+            padding: 32px 24px; 
+            flex: 1;
+        }
+        .main-container h2 { font-size: 20px; font-weight: 400; color: #202124; margin-bottom: 28px; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 28px; }
 
-        /* PRODUCT TILES */
+        /* PRODUCT TILES PRODUCTION STYLING */
         .product-card {
             display: flex;
-            gap: 16px;
-            padding: 20px;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            background: #ffffff;
+            flex-direction: column;
+            align-items: flex-start;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
         }
-        .product-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        .product-icon { 
+            width: 140px; 
+            height: 140px; 
+            border-radius: 28px; 
+            object-fit: cover; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+            margin-bottom: 12px;
+            background-color: #f1f3f4;
         }
-        .product-icon { width: 80px; height: 80px; border-radius: 16px; object-fit: cover; }
-        .product-details h3 { margin: 0 0 4px 0; font-size: 18px; color: #111; }
-        .publisher { margin: 0; color: var(--brand-green); font-size: 14px; font-weight: 500; }
-        .meta-info { margin: 4px 0 12px 0; color: var(--text-light); font-size: 12px; }
+        .product-details { width: 100%; }
+        .product-details h3 { margin: 0 0 2px 0; font-size: 14px; font-weight: 400; color: #202124; }
+        .publisher { margin: 0; color: #5f6368; font-size: 12px; }
+        .meta-info { margin: 2px 0 0 0; color: #5f6368; font-size: 12px; display: flex; gap: 4px; align-items: center; }
 
-        .badge-row { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
-        .badge { padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
-        .badge.version { background: #e8f0fe; color: #1a73e8; }
-        .badge.link-type { background: #fef7e0; color: #b06000; }
-
-        /* MULTI-VIEW PAGE TRANSITION COMPONENT */
+        /* DETAILED DISPLAY LAYOUT PANEL COMPONENTS */
         .back-btn {
             background: none; border: none; color: var(--brand-green);
-            font-size: 16px; font-weight: 500; cursor: pointer;
-            display: flex; align-items: center; gap: 8px; margin-bottom: 24px; padding: 0;
+            font-size: 15px; font-weight: 500; cursor: pointer;
+            display: flex; align-items: center; gap: 8px; margin-bottom: 28px; padding: 0;
         }
         .details-view-header { display: flex; gap: 32px; align-items: flex-start; margin-bottom: 32px; }
         .details-icon { width: 120px; height: 120px; border-radius: 24px; object-fit: cover; border: 1px solid var(--border-color); }
@@ -125,7 +208,6 @@
             border: none; cursor: pointer;
         }
 
-        /* MEDIA CAROUSEL & TEXT VIEW */
         .preview-section { margin-top: 32px; border-bottom: 1px solid var(--border-color); padding-bottom: 32px; }
         .preview-section h3 { font-size: 16px; font-weight: 600; margin-bottom: 16px; color: #202124; }
         .preview-gallery { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 8px; }
@@ -135,7 +217,7 @@
         .about-section h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #202124; }
         .about-text { font-size: 14px; line-height: 1.6; color: #3c4043; white-space: pre-line; }
 
-        /* SECURE PANEL SHIELD OVERLAY */
+        /* SYSTEM DIALOG NODES */
         .admin-modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000;
@@ -143,6 +225,12 @@
         .console-content { background: white; padding: 24px; border-radius: 12px; width: 500px; max-height: 90vh; overflow-y: auto; }
         .console-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
         .close-btn { background: none; border: none; font-size: 28px; cursor: pointer; }
+        
+        .contact-info-box { display: flex; flex-direction: column; gap: 16px; margin-top: 16px; }
+        .contact-item { display: flex; align-items: center; gap: 12px; font-size: 16px; }
+        .contact-label { font-weight: 600; color: #202124; width: 70px; }
+        .contact-value a { color: #1a73e8; text-decoration: none; }
+
         .form-group { margin-bottom: 14px; display: flex; flex-direction: column; gap: 6px; }
         .form-row { display: flex; gap: 16px; }
         .form-row .form-group { flex: 1; }
@@ -159,7 +247,18 @@
         .package-icon { font-size: 48px; margin-bottom: 16px; }
         .hidden { display: none !important; }
         
-        @media (max-width: 600px) {
+        /* EXACT CENTERING LEGAL FOOTER STYLING FROM SCREENSHOT */
+        .platform-footer {
+            text-align: center;
+            padding: 24px;
+            font-size: 12px;
+            color: #5f6368;
+            border-top: 1px solid var(--border-color);
+            background-color: #ffffff;
+            margin-top: auto;
+        }
+
+        @media (max-width: 800px) {
             .search-bar { display: none; }
             .details-view-header { flex-direction: column; align-items: center; text-align: center; gap: 16px; }
             .details-metrics { justify-content: space-around; width: 100%; }
@@ -171,18 +270,21 @@
 
     <header class="navbar">
         <div class="logo-area" onclick="showCatalogView()">
-            <span class="logo-icon">▶</span>
-            <h1>Hidaya <span class="brand-green">Bookshop</span></h1>
+            <div class="playstore-logo"></div>
+            <h1>Hidaya<span class="brand-green">Bookshop</span></h1>
         </div>
         <div class="search-bar">
             <input type="text" placeholder="Search bookstore digital software, apps, and utilities...">
         </div>
-        <button id="toggleConsoleBtn" class="console-btn">Developer Console</button>
+        <div class="nav-actions">
+            <button id="toggleContactBtn" class="contact-btn">Contact Us</button>
+            <button id="toggleConsoleBtn" class="console-btn">Developer Console</button>
+        </div>
     </header>
 
     <nav id="categoryTabs" class="category-tabs">
         <button class="tab-link active" onclick="switchTab('applications')">Applications</button>
-        <button class="tab-link" onclick="white" onclick="switchTab('ebooks')">E-Books & Materials</button>
+        <button class="tab-link" onclick="switchTab('ebooks')">E-Books & Materials</button>
         <button class="tab-link" onclick="switchTab('systems')">Management Systems</button>
     </nav>
 
@@ -236,6 +338,29 @@
             </div>
         </div>
     </main>
+
+    <footer class="platform-footer">
+        ™ 2026 HidayaBookshop Repository Network - Platform Proprietor Operations Managed by Ahmad Abubakar Injay.
+    </footer>
+
+    <div id="contactModal" class="admin-modal hidden">
+        <div class="console-content" style="max-width: 400px;">
+            <div class="console-header">
+                <h2>Contact Us</h2>
+                <button id="closeContactBtn" class="close-btn">&times;</button>
+            </div>
+            <div class="contact-info-box">
+                <div class="contact-item">
+                    <span class="contact-label">Email:</span>
+                    <span class="contact-value"><a href="mailto:ahmadabubakarnjay@gmail.com">ahmadabubakarnjay@gmail.com</a></span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">Phone:</span>
+                    <span class="contact-value"><a href="tel:+2348147399190">+234 814 739 9190</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div id="adminConsole" class="admin-modal hidden">
         <div class="console-content">
@@ -324,12 +449,10 @@
                     "title": "Zaduz Zawjaini",
                     "publisher": "HidayaBookshop",
                     "version": "5.0 ★",
-                    "downloadType": "68.0 MB",
+                    "downloadType": "Link",
                     "downloadUrl": "Zaduz_Zawjaini.apk",
-                    "icon": "logo.png",
-                    "screenshots": [
-                        "logo.png"
-                    ],
+                    "icon": "https://lh3.googleusercontent.com/d/1sJEOjdZnZgmcAXOQbEHWgpjzPHHN8G6t",
+                    "screenshots": [],
                     "about": "Wannan application ne na musamman da aka gina shi domin saukakawa al'umma samun damar karanta littattafai da duba bayanai cikin sauki.\n\nAn gina shi da tsari na zamani wanda zai yi aiki lami lafiya akan kowace irin wayar Android ba tare da kawo tsaiko ko nauyi ba."
                 }
             ],
@@ -337,9 +460,6 @@
             "systems": []
         };
 
-        // =========================================================================
-        // ⚡ ACTIVE PROCESSING ARCHITECTURE
-        // =========================================================================
         let currentTab = 'applications';
 
         const catalogView = document.getElementById('catalogView');
@@ -349,6 +469,7 @@
         const emptyState = document.getElementById('emptyState');
         const categoryTitle = document.getElementById('categoryTitle');
         const adminConsole = document.getElementById('adminConsole');
+        const contactModal = document.getElementById('contactModal');
 
         document.addEventListener('DOMContentLoaded', () => {
             renderProducts();
@@ -366,9 +487,15 @@
                 adminConsole.classList.add('hidden');
                 document.getElementById('outputArea').classList.add('hidden');
             });
+
+            document.getElementById('toggleContactBtn').addEventListener('click', () => {
+                contactModal.classList.remove('hidden');
+            });
+            document.getElementById('closeContactBtn').addEventListener('click', () => {
+                contactModal.classList.add('hidden');
+            });
         });
 
-        // Function to toggle between URL text field and File upload field for APKs
         function toggleFileUrlInputs() {
             const method = document.getElementById('assetUrlMethod').value;
             const urlContainer = document.getElementById('urlInputContainer');
@@ -387,7 +514,6 @@
             }
         }
 
-        // Universal Direct Image Fallback Link Translation Architecture
         function cleanDriveImageUrl(url) {
             if (!url) return '';
             let srcUrl = url.trim();
@@ -434,15 +560,11 @@
                 card.onclick = () => showDescriptionView(currentTab, index);
                 
                 card.innerHTML = `
-                    <img src="${item.icon}" alt="${item.title}" class="product-icon" onerror="this.src='https://via.placeholder.com/80?text=App'">
+                    <img src="${cleanDriveImageUrl(item.icon)}" alt="${item.title}" class="product-icon" onerror="this.src='https://via.placeholder.com/140?text=App'">
                     <div class="product-details">
                         <h3>${item.title}</h3>
                         <p class="publisher">${item.publisher}</p>
-                        <p class="meta-info">Node: Click to view details and descriptions</p>
-                        <div class="badge-row">
-                            <span class="badge version">${item.version}</span>
-                            <span class="badge link-type">☁ ${item.downloadType}</span>
-                        </div>
+                        <p class="meta-info">${item.version} • ${item.downloadType}</p>
                     </div>
                 `;
                 productGrid.appendChild(card);
@@ -452,13 +574,12 @@
         function showDescriptionView(category, index) {
             const item = HIDAYA_DATABASE[category][index];
             
-            document.getElementById('descIcon').src = item.icon;
+            document.getElementById('descIcon').src = cleanDriveImageUrl(item.icon);
             document.getElementById('descTitle').innerText = item.title;
             document.getElementById('descPublisher').innerText = item.publisher;
             document.getElementById('descVersion').innerText = item.version;
             document.getElementById('descType').innerText = item.downloadType;
             
-            // Apply Google Drive fallback formatting directly on output if a URL is logged
             document.getElementById('descDownloadBtn').href = cleanDriveImageUrl(item.downloadUrl);
             document.getElementById('descAboutText').innerText = item.about || 'No structural documentation profiles submitted for this distribution block.';
             
@@ -469,7 +590,7 @@
                     if(srcData.trim()){
                         const img = document.createElement('img');
                         img.className = 'preview-img';
-                        img.src = srcData.trim();
+                        img.src = cleanDriveImageUrl(srcData.trim());
                         img.onerror = function() { this.src='https://via.placeholder.com/220x380?text=Preview+Media'; };
                         gallery.appendChild(img);
                     }
@@ -498,12 +619,10 @@
             });
         }
 
-        // Processing custom data fragments using the conditional form engine
         document.getElementById('assetForm').addEventListener('submit', async (e) => {
             e.preventDefault();
 
             try {
-                // Determine Download URL compilation type
                 const urlMethod = document.getElementById('assetUrlMethod').value;
                 let finalDownloadUrl = "";
 
@@ -518,14 +637,12 @@
                     }
                 }
 
-                // Read Icon Image File
                 const iconFileInput = document.getElementById('assetIconFile');
                 let compiledIconData = "logo.png";
                 if (iconFileInput.files.length > 0) {
                     compiledIconData = await readAsDataURL(iconFileInput.files[0]);
                 }
 
-                // Read Multiple Gallery Screenshot Files
                 const screenshotFilesInput = document.getElementById('assetScreenshotsFiles');
                 let compiledScreenshotsArray = [];
                 for (let i = 0; i < screenshotFilesInput.files.length; i++) {
