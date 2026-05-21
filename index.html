@@ -33,7 +33,6 @@
             background-color: #ffffff;
         }
         
-        /* EXACT LOGO AREA FROM SCREENSHOT */
         .logo-area { 
             display: flex; 
             align-items: center; 
@@ -42,7 +41,6 @@
             user-select: none;
         }
         
-        /* EXACT PLAYSTORE TRICOLOR GEOMETRIC EMBLEM via CSS */
         .playstore-logo {
             width: 18px;
             height: 20px;
@@ -76,10 +74,7 @@
         }
         .brand-green { color: var(--brand-green); font-weight: 600; margin-left: 2px;}
         
-        /* CENTER SEARCH FIELD */
-        .search-bar {
-            position: relative;
-        }
+        .search-bar { position: relative; }
         .search-bar input {
             width: 460px;
             padding: 12px 16px 12px 42px;
@@ -92,7 +87,6 @@
         }
         .search-bar input:focus {
             background-color: #ffffff;
-            border-color: transparent;
             box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
             outline: none;
         }
@@ -107,7 +101,6 @@
             opacity: 0.7;
         }
         
-        /* ACTION ROW ELEMENTS */
         .nav-actions { display: flex; align-items: center; gap: 12px; }
         .contact-btn {
             padding: 9px 16px;
@@ -131,9 +124,7 @@
             color: #1a73e8;
             font-size: 14px;
         }
-        .console-btn:hover { background: #f8fafd; }
 
-        /* CATEGORY NAVIGATION LINKS */
         .category-tabs {
             display: flex;
             gap: 24px;
@@ -156,37 +147,21 @@
             border-bottom-color: var(--brand-green);
         }
 
-        /* CORE VIEWPORT CONTENT WRAPPER */
-        .main-container { 
-            padding: 32px 24px; 
-            flex: 1;
-        }
+        .main-container { padding: 32px 24px; flex: 1; }
         .main-container h2 { font-size: 20px; font-weight: 400; color: #202124; margin-bottom: 28px; }
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 28px; }
 
-        /* PRODUCT TILES PRODUCTION STYLING */
-        .product-card {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            cursor: pointer;
-            text-decoration: none;
-        }
+        .product-card { display: flex; flex-direction: column; align-items: flex-start; cursor: pointer; text-decoration: none; }
         .product-icon { 
-            width: 140px; 
-            height: 140px; 
-            border-radius: 28px; 
-            object-fit: cover; 
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
-            margin-bottom: 12px;
+            width: 140px; height: 140px; border-radius: 28px; object-fit: cover; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06); margin-bottom: 12px;
             background-color: #f1f3f4;
         }
         .product-details { width: 100%; }
         .product-details h3 { margin: 0 0 2px 0; font-size: 14px; font-weight: 400; color: #202124; }
         .publisher { margin: 0; color: #5f6368; font-size: 12px; }
-        .meta-info { margin: 2px 0 0 0; color: #5f6368; font-size: 12px; display: flex; gap: 4px; align-items: center; }
+        .meta-info { margin: 2px 0 0 0; color: #5f6368; font-size: 12px; }
 
-        /* DETAILED DISPLAY LAYOUT PANEL COMPONENTS */
         .back-btn {
             background: none; border: none; color: var(--brand-green);
             font-size: 15px; font-weight: 500; cursor: pointer;
@@ -201,11 +176,8 @@
         .metric-lbl { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; }
         
         .install-btn {
-            display: inline-block; padding: 12px 48px;
-            background-color: var(--brand-green); color: white;
-            text-decoration: none; border-radius: 24px;
-            font-size: 14px; font-weight: 500; text-align: center;
-            border: none; cursor: pointer;
+            display: inline-block; padding: 12px 48px; background-color: var(--brand-green); color: white;
+            text-decoration: none; border-radius: 24px; font-size: 14px; font-weight: 500; text-align: center;
         }
 
         .preview-section { margin-top: 32px; border-bottom: 1px solid var(--border-color); padding-bottom: 32px; }
@@ -217,7 +189,7 @@
         .about-section h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #202124; }
         .about-text { font-size: 14px; line-height: 1.6; color: #3c4043; white-space: pre-line; }
 
-        /* SYSTEM DIALOG NODES */
+        /* ADMIN MODALS */
         .admin-modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000;
@@ -226,17 +198,11 @@
         .console-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
         .close-btn { background: none; border: none; font-size: 28px; cursor: pointer; }
         
-        .contact-info-box { display: flex; flex-direction: column; gap: 16px; margin-top: 16px; }
-        .contact-item { display: flex; align-items: center; gap: 12px; font-size: 16px; }
-        .contact-label { font-weight: 600; color: #202124; width: 70px; }
-        .contact-value a { color: #1a73e8; text-decoration: none; }
-
         .form-group { margin-bottom: 14px; display: flex; flex-direction: column; gap: 6px; }
         .form-row { display: flex; gap: 16px; }
         .form-row .form-group { flex: 1; }
         .form-group input, .form-group select, .form-group textarea { padding: 10px; border: 1px solid var(--border-color); border-radius: 6px; font-family: inherit; }
         .form-group textarea { resize: vertical; height: 70px; }
-        .form-group input[type="file"] { padding: 6px; background: var(--bg-light); cursor: pointer; }
         .generate-btn { width: 100%; padding: 12px; background: #202124; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; }
         
         .output-area { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color); }
@@ -244,25 +210,11 @@
         .copy-btn { margin-top: 10px; padding: 8px 16px; background: var(--brand-green); color: white; border: none; border-radius: 4px; cursor: pointer; }
 
         .empty-state { text-align: center; padding: 60px 0; color: var(--text-light); }
-        .package-icon { font-size: 48px; margin-bottom: 16px; }
         .hidden { display: none !important; }
         
-        /* EXACT CENTERING LEGAL FOOTER STYLING FROM SCREENSHOT */
         .platform-footer {
-            text-align: center;
-            padding: 24px;
-            font-size: 12px;
-            color: #5f6368;
-            border-top: 1px solid var(--border-color);
-            background-color: #ffffff;
-            margin-top: auto;
-        }
-
-        @media (max-width: 800px) {
-            .search-bar { display: none; }
-            .details-view-header { flex-direction: column; align-items: center; text-align: center; gap: 16px; }
-            .details-metrics { justify-content: space-around; width: 100%; }
-            .preview-img { height: 320px; }
+            text-align: center; padding: 24px; font-size: 12px; color: #5f6368;
+            border-top: 1px solid var(--border-color); background-color: #ffffff; margin-top: auto;
         }
     </style>
 </head>
@@ -277,7 +229,7 @@
             <input type="text" placeholder="Search bookstore digital software, apps, and utilities...">
         </div>
         <div class="nav-actions">
-            <button id="toggleContactBtn" class="contact-btn">Contact Us</button>
+            <button id="toggleContactBtn" class="contact-btn" style="display:none;">Contact Us</button>
             <button id="toggleConsoleBtn" class="console-btn">Developer Console</button>
         </div>
     </header>
@@ -293,45 +245,29 @@
             <h2 id="categoryTitle">Published Ecosystem Distributions</h2>
             <div id="productGrid" class="product-grid"></div>
             <div id="emptyState" class="empty-state hidden">
-                <div class="package-icon">📦</div>
-                <p>No software packages found tracking search variables inside this collection.</p>
+                <p>No software packages found inside this collection.</p>
             </div>
         </div>
 
         <div id="descriptionView" class="hidden">
             <button class="back-btn" onclick="showCatalogView()">← Back to Hub Catalog</button>
-            
             <div class="details-view-header">
                 <img id="descIcon" src="" alt="App Icon" class="details-icon">
                 <div class="details-meta-box">
                     <h2 id="descTitle"></h2>
                     <p id="descPublisher" class="publisher"></p>
-                    <p class="meta-info">Publisher Node: Verified Secure Asset Base</p>
-                    
                     <div class="details-metrics">
-                        <div class="metric-item">
-                            <span id="descVersion" class="metric-val"></span>
-                            <span class="metric-lbl">Official Release</span>
-                        </div>
-                        <div class="metric-item">
-                            <span id="descType" class="metric-val"></span>
-                            <span class="metric-lbl">Storage Size</span>
-                        </div>
-                        <div class="metric-item">
-                            <span class="metric-val" style="color:#137333;">Secure</span>
-                            <span class="metric-lbl">Verified Link</span>
-                        </div>
+                        <div class="metric-item"><span id="descVersion" class="metric-val"></span><span class="metric-lbl">Official Release</span></div>
+                        <div class="metric-item"><span id="descType" class="metric-val"></span><span class="metric-lbl">Storage Size</span></div>
+                        <div class="metric-item"><span class="metric-val" style="color:#137333;">Secure</span><span class="metric-lbl">Verified Link</span></div>
                     </div>
-                    
                     <a id="descDownloadBtn" href="" target="_blank" class="install-btn" download>Install Application</a>
                 </div>
             </div>
-
             <div class="preview-section">
                 <h3>Application Preview Media</h3>
                 <div id="descGallery" class="preview-gallery"></div>
             </div>
-
             <div class="about-section">
                 <h3>About this distribution</h3>
                 <div id="descAboutText" class="about-text"></div>
@@ -342,25 +278,6 @@
     <footer class="platform-footer">
         ™ 2026 HidayaBookshop Repository Network - Platform Proprietor Operations Managed by Ahmad Abubakar Injay.
     </footer>
-
-    <div id="contactModal" class="admin-modal hidden">
-        <div class="console-content" style="max-width: 400px;">
-            <div class="console-header">
-                <h2>Contact Us</h2>
-                <button id="closeContactBtn" class="close-btn">×</button>
-            </div>
-            <div class="contact-info-box">
-                <div class="contact-item">
-                    <span class="contact-label">Email:</span>
-                    <span class="contact-value"><a href="mailto:ahmadabubakarnjay@gmail.com">ahmadabubakarnjay@gmail.com</a></span>
-                </div>
-                <div class="contact-item">
-                    <span class="contact-label">Phone:</span>
-                    <span class="contact-value"><a href="tel:+2348147399190">+234 814 739 9190</a></span>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div id="adminConsole" class="admin-modal hidden">
         <div class="console-content">
@@ -399,46 +316,66 @@
 
                 <div class="form-group">
                     <label>Download File Source Method:</label>
-                    <select id="assetUrlMethod" onchange="toggleFileUrlInputs()" required>
+                    <select id="assetUrlMethod" onchange="toggleInputs()" required>
                         <option value="url">Paste URL Code (Google Drive/External Link)</option>
-                        <option value="local">Upload Local File from Computer (Converts to Base64 String)</option>
-                        <option value="github">GitHub Repository Folder (Type file name directly)</option>
+                        <option value="local">Upload Local File from Computer</option>
+                        <option value="github">GitHub Repository Folder Path</option>
                     </select>
                 </div>
-
                 <div class="form-group" id="urlInputContainer">
                     <label>Google Drive or Web URL Link:</label>
-                    <input type="url" id="assetUrlText" placeholder="https://drive.google.com/..." value="https://drive.google.com/">
+                    <input type="url" id="assetUrlText" value="https://drive.google.com/">
                 </div>
-
                 <div class="form-group hidden" id="fileInputContainer">
                     <label>Select App/Book Local File:</label>
-                    <input type="file" id="assetUrlFile" accept=".apk,.pdf,.zip,.epub,.msi,.exe">
+                    <input type="file" id="assetUrlFile" accept=".apk,.pdf,.zip,.epub">
                 </div>
-
                 <div class="form-group hidden" id="githubInputContainer">
-                    <label>Type File Name as saved in GitHub Repository (e.g., Zaduz_Zawjaini.apk):</label>
-                    <input type="text" id="assetGithubText" placeholder="e.g., Zaduz_Zawjaini.apk" value="Zaduz_Zawjaini.apk">
+                    <label>Type GitHub File Name (e.g., Zaduz_Zawjaini.apk):</label>
+                    <input type="text" id="assetGithubText" value="Zaduz_Zawjaini.apk">
                 </div>
 
                 <div class="form-group">
-                    <label>Upload App Brand Icon Picture:</label>
-                    <input type="file" id="assetIconFile" accept="image/*" required>
+                    <label>Icon Image Source Method:</label>
+                    <select id="assetIconMethod" onchange="toggleInputs()" required>
+                        <option value="url">Paste URL / GitHub Repository Path</option>
+                        <option value="local">Upload Local Image File</option>
+                    </select>
                 </div>
+                <div class="form-group" id="iconUrlContainer">
+                    <label>Type Image Filename or URL (e.g., Zadu.png):</label>
+                    <input type="text" id="assetIconText" value="Zadu.png">
+                </div>
+                <div class="form-group hidden" id="iconFileContainer">
+                    <label>Select Local Icon Image File:</label>
+                    <input type="file" id="assetIconFile" accept="image/*">
+                </div>
+
                 <div class="form-group">
-                    <label>Upload App Gallery Screenshots (Select multiple images):</label>
-                    <input type="file" id="assetScreenshotsFiles" accept="image/*" multiple required>
+                    <label>Screenshots Media Gallery Method:</label>
+                    <select id="assetScreenshotsMethod" onchange="toggleInputs()" required>
+                        <option value="url">Paste Comma-Separated Paths / URLs</option>
+                        <option value="local">Upload Multiple Local Image Files</option>
+                    </select>
                 </div>
+                <div class="form-group" id="screenshotsUrlContainer">
+                    <label>Type Comma-Separated Filenames/URLs (e.g., 1.jpeg, 2.jpeg, 3.jpeg):</label>
+                    <input type="text" id="assetScreenshotsText" value="1.jpeg, 2.jpeg, 3.jpeg">
+                </div>
+                <div class="form-group hidden" id="screenshotsFileContainer">
+                    <label>Select Multiple Local Screenshots:</label>
+                    <input type="file" id="assetScreenshotsFiles" accept="image/*" multiple>
+                </div>
+
                 <div class="form-group">
                     <label>About Document Description:</label>
-                    <textarea id="assetAbout" placeholder="Type manual descriptions..." required>Alhamdulillah...</textarea>
+                    <textarea id="assetAbout" required>Alhamdulillah...</textarea>
                 </div>
                 <button type="submit" class="generate-btn">Compile Code Snippet</button>
             </form>
 
             <div id="outputArea" class="output-area hidden">
                 <h3>📦 Generated Data Fragment</h3>
-                <p>Copy this block, open your <code>index.html</code> file on GitHub, find <code>HIDAYA_DATABASE</code>, paste it into the array, and save.</p>
                 <textarea id="codeOutput" readonly></textarea>
                 <button type="button" onclick="copyDeploymentCode()" class="copy-btn">Copy to Clipboard</button>
             </div>
@@ -446,9 +383,6 @@
     </div>
 
     <script>
-        // =========================================================================
-        // 💾 CENTRAL DATA STORE
-        // =========================================================================
         const HIDAYA_DATABASE = {
             "applications": [
                 {
@@ -459,7 +393,7 @@
                     "downloadUrl": "Zaduz_Zawjaini.apk",
                     "icon": "Zadu.png",
                     "screenshots": ["1.jpeg", "2.jpeg", "3.jpeg"],
-                    "about": "Wannan application ne na musamman da aka gina shi domin saukakawa al'umma samun damar karanta littattafai da duba bayanai cikin sauki.\n\nAn gina shi da tsari na zamani wanda zai yi aiki lami lafiya akan kowace irin wayar Android ba tare da kawo tsaiko ko nauyi ba."
+                    "about": "Wannan application ne na musamman da aka gina shi domin saukakawa al'umma samun damar karanta littattafai da duba bayanai cikin sauki."
                 }
             ],
             "ebooks": [],
@@ -467,7 +401,6 @@
         };
 
         let currentTab = 'applications';
-
         const catalogView = document.getElementById('catalogView');
         const descriptionView = document.getElementById('descriptionView');
         const categoryTabs = document.getElementById('categoryTabs');
@@ -475,73 +408,41 @@
         const emptyState = document.getElementById('emptyState');
         const categoryTitle = document.getElementById('categoryTitle');
         const adminConsole = document.getElementById('adminConsole');
-        const contactModal = document.getElementById('contactModal');
 
         document.addEventListener('DOMContentLoaded', () => {
             renderProducts();
-            
             document.getElementById('toggleConsoleBtn').addEventListener('click', () => {
-                const securityToken = prompt("Enter Administration Node Security Key:");
-                if (securityToken === "admin123") {
-                    adminConsole.classList.remove('hidden');
-                } else if (securityToken !== null) {
-                    alert("Access Denied.");
-                }
+                if (prompt("Enter Security Key:") === "admin123") adminConsole.classList.remove('hidden');
             });
-
             document.getElementById('closeConsoleBtn').addEventListener('click', () => {
                 adminConsole.classList.add('hidden');
-                document.getElementById('outputArea').classList.add('hidden');
-            });
-
-            document.getElementById('toggleContactBtn').addEventListener('click', () => {
-                contactModal.classList.remove('hidden');
-            });
-            document.getElementById('closeContactBtn').addEventListener('click', () => {
-                contactModal.classList.add('hidden');
             });
         });
 
-        // TOGGLE INPUT VIEWS ACCORDING TO THE THREE SELECTIONS
-        function toggleFileUrlInputs() {
-            const method = document.getElementById('assetUrlMethod').value;
-            const urlContainer = document.getElementById('urlInputContainer');
-            const fileContainer = document.getElementById('fileInputContainer');
-            const githubContainer = document.getElementById('githubInputContainer');
+        function toggleInputs() {
+            const urlMethod = document.getElementById('assetUrlMethod').value;
+            document.getElementById('urlInputContainer').className = urlMethod === 'url' ? 'form-group' : 'form-group hidden';
+            document.getElementById('fileInputContainer').className = urlMethod === 'local' ? 'form-group' : 'form-group hidden';
+            document.getElementById('githubInputContainer').className = urlMethod === 'github' ? 'form-group' : 'form-group hidden';
 
-            urlContainer.classList.add('hidden');
-            fileContainer.classList.add('hidden');
-            githubContainer.classList.add('hidden');
-            
-            document.getElementById('assetUrlText').removeAttribute('required');
-            document.getElementById('assetUrlFile').removeAttribute('required');
-            document.getElementById('assetGithubText').removeAttribute('required');
+            const iconMethod = document.getElementById('assetIconMethod').value;
+            document.getElementById('iconUrlContainer').className = iconMethod === 'url' ? 'form-group' : 'form-group hidden';
+            document.getElementById('iconFileContainer').className = iconMethod === 'local' ? 'form-group' : 'form-group hidden';
 
-            if (method === 'url') {
-                urlContainer.classList.remove('hidden');
-                document.getElementById('assetUrlText').setAttribute('required', 'true');
-            } else if (method === 'local') {
-                fileContainer.classList.remove('hidden');
-                document.getElementById('assetUrlFile').setAttribute('required', 'true');
-            } else if (method === 'github') {
-                githubContainer.classList.remove('hidden');
-                document.getElementById('assetGithubText').setAttribute('required', 'true');
-            }
+            const screenMethod = document.getElementById('assetScreenshotsMethod').value;
+            document.getElementById('screenshotsUrlContainer').className = screenMethod === 'url' ? 'form-group' : 'form-group hidden';
+            document.getElementById('screenshotsFileContainer').className = screenMethod === 'local' ? 'form-group' : 'form-group hidden';
         }
 
+        // AUTOMATED GOOGLE DRIVE RENDERING FORMATTER
         function cleanDriveImageUrl(url) {
             if (!url) return '';
             let srcUrl = url.trim();
             if (srcUrl.includes('drive.google.com')) {
                 let fileId = '';
-                if (srcUrl.includes('id=')) {
-                    fileId = srcUrl.split('id=')[1].split('&')[0];
-                } else if (srcUrl.includes('/file/d/')) {
-                    fileId = srcUrl.split('/file/d/')[1].split('/')[0];
-                }
-                if (fileId) {
-                    return `https://docs.google.com/uc?export=view&id=${fileId}`;
-                }
+                if (srcUrl.includes('id=')) fileId = srcUrl.split('id=')[1].split('&')[0];
+                else if (srcUrl.includes('/file/d/')) fileId = srcUrl.split('/file/d/')[1].split('/')[0];
+                if (fileId) return `https://docs.google.com/uc?export=view&id=${fileId}`;
             }
             return srcUrl;
         }
@@ -550,29 +451,20 @@
             currentTab = tabName;
             document.querySelectorAll('.tab-link').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
-            
-            if(tabName === 'applications') categoryTitle.innerText = "Published Ecosystem Distributions";
-            if(tabName === 'ebooks') categoryTitle.innerText = "E-Books & Academic Reference Materials";
-            if(tabName === 'systems') categoryTitle.innerText = "Enterprise Architecture Management Systems";
-            
+            categoryTitle.innerText = tabName === 'applications' ? "Published Ecosystem Distributions" : (tabName === 'ebooks' ? "E-Books & Academic Reference Materials" : "Enterprise Architecture Management Systems");
             showCatalogView();
         }
 
         function renderProducts() {
             productGrid.innerHTML = '';
             const items = HIDAYA_DATABASE[currentTab] || [];
-
-            if (items.length === 0) {
-                emptyState.classList.remove('hidden');
-                return;
-            }
+            if (items.length === 0) { emptyState.classList.remove('hidden'); return; }
             emptyState.classList.add('hidden');
 
             items.forEach((item, index) => {
                 const card = document.createElement('div');
                 card.className = 'product-card';
                 card.onclick = () => showDescriptionView(currentTab, index);
-                
                 card.innerHTML = `
                     <img src="${cleanDriveImageUrl(item.icon)}" alt="${item.title}" class="product-icon" onerror="this.src='https://via.placeholder.com/140?text=App'">
                     <div class="product-details">
@@ -587,30 +479,27 @@
 
         function showDescriptionView(category, index) {
             const item = HIDAYA_DATABASE[category][index];
-            
             document.getElementById('descIcon').src = cleanDriveImageUrl(item.icon);
             document.getElementById('descTitle').innerText = item.title;
             document.getElementById('descPublisher').innerText = item.publisher;
             document.getElementById('descVersion').innerText = item.version;
             document.getElementById('descType').innerText = item.downloadType;
-            
             document.getElementById('descDownloadBtn').href = cleanDriveImageUrl(item.downloadUrl);
             document.getElementById('descAboutText').innerText = item.about || '';
             
             const gallery = document.getElementById('descGallery');
             gallery.innerHTML = '';
-            if(item.screenshots && item.screenshots.length > 0) {
-                item.screenshots.forEach(srcData => {
-                    if(srcData.trim()){
+            if(item.screenshots) {
+                item.screenshots.forEach(src => {
+                    if(src.trim()){
                         const img = document.createElement('img');
                         img.className = 'preview-img';
-                        img.src = cleanDriveImageUrl(srcData.trim());
+                        img.src = cleanDriveImageUrl(src.trim());
                         img.onerror = function() { this.src='https://via.placeholder.com/220x380?text=Preview'; };
                         gallery.appendChild(img);
                     }
                 });
             }
-
             catalogView.classList.add('hidden');
             categoryTabs.classList.add('hidden');
             descriptionView.classList.remove('hidden');
@@ -635,35 +524,30 @@
 
         document.getElementById('assetForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-
             try {
+                // Parse Download URL
                 const urlMethod = document.getElementById('assetUrlMethod').value;
                 let finalDownloadUrl = "";
+                if (urlMethod === 'url') finalDownloadUrl = cleanDriveImageUrl(document.getElementById('assetUrlText').value);
+                else if (urlMethod === 'github') finalDownloadUrl = document.getElementById('assetGithubText').value;
+                else finalDownloadUrl = document.getElementById('assetUrlFile').files.length > 0 ? await readAsDataURL(document.getElementById('assetUrlFile').files[0]) : "";
 
-                if (urlMethod === 'url') {
-                    finalDownloadUrl = document.getElementById('assetUrlText').value;
-                } else if (urlMethod === 'github') {
-                    finalDownloadUrl = document.getElementById('assetGithubText').value;
+                // Parse Brand Icon Image
+                const iconMethod = document.getElementById('assetIconMethod').value;
+                let finalIcon = "";
+                if (iconMethod === 'url') finalIcon = cleanDriveImageUrl(document.getElementById('assetIconText').value);
+                else finalIcon = document.getElementById('assetIconFile').files.length > 0 ? await readAsDataURL(document.getElementById('assetIconFile').files[0]) : "Zadu.png";
+
+                // Parse Screenshots Gallery
+                const screenMethod = document.getElementById('assetScreenshotsMethod').value;
+                let finalScreenshots = [];
+                if (screenMethod === 'url') {
+                    finalScreenshots = document.getElementById('assetScreenshotsText').value.split(',').map(s => cleanDriveImageUrl(s.trim()));
                 } else {
-                    const fileInput = document.getElementById('assetUrlFile');
-                    if (fileInput.files.length > 0) {
-                        finalDownloadUrl = await readAsDataURL(fileInput.files[0]);
-                    } else {
-                        throw new Error("Please select a file to process.");
+                    const filesInput = document.getElementById('assetScreenshotsFiles');
+                    for (let i = 0; i < filesInput.files.length; i++) {
+                        finalScreenshots.push(await readAsDataURL(filesInput.files[i]));
                     }
-                }
-
-                const iconFileInput = document.getElementById('assetIconFile');
-                let compiledIconData = "";
-                if (iconFileInput.files.length > 0) {
-                    compiledIconData = await readAsDataURL(iconFileInput.files[0]);
-                }
-
-                const screenshotFilesInput = document.getElementById('assetScreenshotsFiles');
-                let compiledScreenshotsArray = [];
-                for (let i = 0; i < screenshotFilesInput.files.length; i++) {
-                    const dataString = await readAsDataURL(screenshotFilesInput.files[i]);
-                    compiledScreenshotsArray.push(dataString);
                 }
 
                 const dynamicSnippet = {
@@ -672,8 +556,8 @@
                     "version": document.getElementById('assetVersion').value + " ★",
                     "downloadType": document.getElementById('assetLinkType').value,
                     "downloadUrl": finalDownloadUrl,
-                    "icon": compiledIconData,
-                    "screenshots": compiledScreenshotsArray,
+                    "icon": finalIcon,
+                    "screenshots": finalScreenshots,
                     "about": document.getElementById('assetAbout').value
                 };
 
@@ -685,8 +569,7 @@
         });
 
         function copyDeploymentCode() {
-            const codeOutput = document.getElementById('codeOutput');
-            codeOutput.select();
+            document.getElementById('codeOutput').select();
             document.execCommand('copy');
             alert('Fragment copied successfully!');
         }
