@@ -148,6 +148,7 @@
         .form-row .form-group { flex: 1; }
         .form-group input, .form-group select, .form-group textarea { padding: 10px; border: 1px solid var(--border-color); border-radius: 6px; font-family: inherit; }
         .form-group textarea { resize: vertical; height: 70px; }
+        .form-group input[type="file"] { padding: 6px; background: var(--bg-light); cursor: pointer; }
         .generate-btn { width: 100%; padding: 12px; background: #202124; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; }
         
         .output-area { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color); }
@@ -271,16 +272,16 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Local APK/PDF File Name (e.g., Zaduz_Zawjaini.apk):</label>
+                    <label>Local APK/PDF File Name or Link:</label>
                     <input type="text" id="assetUrl" value="Zaduz_Zawjaini.apk" required>
                 </div>
                 <div class="form-group">
-                    <label>App Brand Icon File Name (e.g., logo.png):</label>
-                    <input type="text" id="assetIcon" value="logo.png" required>
+                    <label>Upload App Brand Icon Picture:</label>
+                    <input type="file" id="assetIconFile" accept="image/*" required>
                 </div>
                 <div class="form-group">
-                    <label>Local Screenshot File Names (One filename per line):</label>
-                    <textarea id="assetScreenshots" placeholder="screenshot1.jpg&#10;screenshot2.jpg" required></textarea>
+                    <label>Upload App Gallery Screenshots (Select multiple images):</label>
+                    <input type="file" id="assetScreenshotsFiles" accept="image/*" multiple required>
                 </div>
                 <div class="form-group">
                     <label>About Document Description:</label>
@@ -300,7 +301,7 @@
 
     <script>
         // =========================================================================
-        // 💾 CENTRAL DATA STORE (Now streamlined for direct Repository Hosting)
+        // 💾 CENTRAL DATA STORE
         // =========================================================================
         const HIDAYA_DATABASE = {
             "applications": [
@@ -309,11 +310,10 @@
                     "publisher": "HidayaBookshop",
                     "version": "5.0 ★",
                     "downloadType": "68.0 MB",
-                    "downloadUrl": "Zaduz_Zawjaini.apk", // Safe, local APK tracking
-                    "icon": "logo.png",                  // Safe, local App Icon image
+                    "downloadUrl": "Zaduz_Zawjaini.apk",
+                    "icon": "logo.png",
                     "screenshots": [
-                        "screenshot1.jpg",               // Upload these directly to your GitHub folder!
-                        "screenshot2.jpg"
+                        "logo.png"
                     ],
                     "about": "Wannan application ne na musamman da aka gina shi domin saukakawa al'umma samun damar karanta littattafai da duba bayanai cikin sauki.\n\nAn gina shi da tsari na zamani wanda zai yi aiki lami lafiya akan kowace irin wayar Android ba tare da kawo tsaiko ko nauyi ba."
                 }
@@ -410,11 +410,11 @@
             const gallery = document.getElementById('descGallery');
             gallery.innerHTML = '';
             if(item.screenshots && item.screenshots.length > 0) {
-                item.screenshots.forEach(fileName => {
-                    if(fileName.trim()){
+                item.screenshots.forEach(srcData => {
+                    if(srcData.trim()){
                         const img = document.createElement('img');
                         img.className = 'preview-img';
-                        img.src = fileName.trim();
+                        img.src = srcData.trim();
                         img.onerror = function() { this.src='https://via.placeholder.com/220x380?text=Preview+Media'; };
                         gallery.appendChild(img);
                     }
@@ -434,25 +434,52 @@
             renderProducts();
         }
 
-        document.getElementById('assetForm').addEventListener('submit', (e) => {
+        // Helper function to turn a file object into a Base64 URL string
+        function readAsDataURL(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Processing custom data fragments using the file upload inputs
+        document.getElementById('assetForm').addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const rawScreenshots = document.getElementById('assetScreenshots').value;
-            const linesArray = rawScreenshots.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+            try {
+                // Read Icon File
+                const iconFileInput = document.getElementById('assetIconFile');
+                let compiledIconData = "logo.png"; // Fallback default
+                if (iconFileInput.files.length > 0) {
+                    compiledIconData = await readAsDataURL(iconFileInput.files[0]);
+                }
 
-            const dynamicSnippet = {
-                "title": document.getElementById('assetTitle').value,
-                "publisher": document.getElementById('assetPublisher').value,
-                "version": document.getElementById('assetVersion').value + " ★",
-                "downloadType": document.getElementById('assetLinkType').value,
-                "downloadUrl": document.getElementById('assetUrl').value,
-                "icon": document.getElementById('assetIcon').value,
-                "screenshots": linesArray,
-                "about": document.getElementById('assetAbout').value
-            };
+                // Read Multiple Screenshot Files
+                const screenshotFilesInput = document.getElementById('assetScreenshotsFiles');
+                let compiledScreenshotsArray = [];
+                for (let i = 0; i < screenshotFilesInput.files.length; i++) {
+                    const dataString = await readAsDataURL(screenshotFilesInput.files[i]);
+                    compiledScreenshotsArray.push(dataString);
+                }
 
-            document.getElementById('codeOutput').value = JSON.stringify(dynamicSnippet, null, 2) + ",";
-            document.getElementById('outputArea').classList.remove('hidden');
+                const dynamicSnippet = {
+                    "title": document.getElementById('assetTitle').value,
+                    "publisher": document.getElementById('assetPublisher').value,
+                    "version": document.getElementById('assetVersion').value + " ★",
+                    "downloadType": document.getElementById('assetLinkType').value,
+                    "downloadUrl": document.getElementById('assetUrl').value,
+                    "icon": compiledIconData,
+                    "screenshots": compiledScreenshotsArray,
+                    "about": document.getElementById('assetAbout').value
+                };
+
+                document.getElementById('codeOutput').value = JSON.stringify(dynamicSnippet, null, 2) + ",";
+                document.getElementById('outputArea').classList.remove('hidden');
+            } catch (err) {
+                alert("Error processing image assets: " + err.message);
+            }
         });
 
         function copyDeploymentCode() {
