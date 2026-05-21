@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hidaya Bookshop - Digital Hub</title>
@@ -154,14 +154,27 @@
 
     <nav class="category-tabs">
         <button class="tab-link active" onclick="switchTab('applications')">Applications</button>
-        <button class="tab-link" onclick="switchTab('ebooks')">E-Books & Materials</button>
+        <button class="tab-link" onclick="switchTab('ebooks')">E-Books &amp; Materials</button>
         <button class="tab-link" onclick="switchTab('systems')">Management Systems</button>
     </nav>
 
     <main class="main-container">
         <h2 id="categoryTitle">Published Ecosystem Distributions</h2>
         
-        <div id="productGrid" class="product-grid"></div>
+        <div id="productGrid" class="product-grid"><div class="product-card">
+                    <img src="Zadu.png" alt="Zaduz Zaujaini" class="product-icon" onerror="this.src='https://via.placeholder.com/80?text=App'">
+                    <div class="product-details">
+                        <h3>Zaduz Zaujaini</h3>
+                        <p class="publisher">HidayaBookshop</p>
+                        <p class="meta-info">Node: Verified Secure Asset Base</p>
+                        <div class="badge-row">
+                            <span class="badge version">5.0 ★</span>
+                            <span class="badge link-type">☁ GDrive Link</span>
+                            <span class="badge secure">✔ Secure</span>
+                        </div>
+                        <a href="https://drive.google.com/file/d/1jwzqIhZE3ZXLHbTL82RWsGT2pOLawcbj/view?usp=drive_link" target="_blank" class="install-btn">Install Application</a>
+                    </div>
+                </div></div>
 
         <div id="emptyState" class="empty-state hidden">
             <div class="package-icon">📦</div>
@@ -169,52 +182,52 @@
         </div>
     </main>
 
-    <div id="adminConsole" class="admin-modal hidden">
+    <div id="adminConsole" class="admin-modal">
         <div class="console-content">
             <div class="console-header">
                 <h2>Hidaya Asset Hub Developer Console</h2>
-                <button id="closeConsoleBtn" class="close-btn">&times;</button>
+                <button id="closeConsoleBtn" class="close-btn">×</button>
             </div>
             
             <form id="assetForm">
                 <div class="form-group">
                     <label>Collection Target:</label>
-                    <select id="assetCategory" required>
+                    <select id="assetCategory" required="">
                         <option value="applications">Applications</option>
-                        <option value="ebooks">E-Books & Materials</option>
+                        <option value="ebooks">E-Books &amp; Materials</option>
                         <option value="systems">Management Systems</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label>Application/Asset Title:</label>
-                    <input type="text" id="assetTitle" placeholder="e.g., Zaduz Zawjaini" required>
+                    <input type="text" id="assetTitle" placeholder="e.g., Zaduz Zawjaini" required="">
                 </div>
 
                 <div class="form-group">
                     <label>Publisher Node Label:</label>
-                    <input type="text" id="assetPublisher" value="HidayaBookshop" required>
+                    <input type="text" id="assetPublisher" value="HidayaBookshop" required="">
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label>Distribution Version:</label>
-                        <input type="text" id="assetVersion" value="5.0" required>
+                        <input type="text" id="assetVersion" value="5.0" required="">
                     </div>
                     <div class="form-group">
                         <label>Storage Node Type:</label>
-                        <input type="text" id="assetLinkType" value="GDrive Link" required>
+                        <input type="text" id="assetLinkType" value="GDrive Link" required="">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label>Secure Storage URL Asset Link:</label>
-                    <input type="url" id="assetUrl" placeholder="https://drive.google.com/..." required>
+                    <input type="url" id="assetUrl" placeholder="https://drive.google.com/..." required="">
                 </div>
 
                 <div class="form-group">
                     <label>Asset Icon Local Path Name:</label>
-                    <input type="text" id="assetIcon" placeholder="e.g., logo.png" required>
+                    <input type="text" id="assetIcon" placeholder="e.g., logo.png" required="">
                 </div>
 
                 <button type="submit" class="generate-btn">Generate Deployment Code</button>
@@ -223,7 +236,7 @@
             <div id="outputArea" class="output-area hidden">
                 <h3>📦 Generated Master File Code</h3>
                 <p>Copy all code below, completely delete everything in your <code>index.html</code> file on GitHub, and replace it with this to save your items permanently.</p>
-                <textarea id="codeOutput" readonly></textarea>
+                <textarea id="codeOutput" readonly=""></textarea>
                 <button onclick="copyDeploymentCode()" class="copy-btn">Copy New Codebase</button>
             </div>
         </div>
@@ -234,10 +247,19 @@
         // 💾 CORE MASTER DATABASE DIRECTORY (EDIT HERE DIRECTLY OR VIA CONSOLE)
         // ==========================================
         const HIDAYA_DATABASE = {
-            "applications": [],
-            "ebooks": [],
-            "systems": []
-        };
+          "applications": [
+                    {
+                              "title": "Zaduz Zaujaini",
+                              "publisher": "HidayaBookshop",
+                              "version": "5.0",
+                              "downloadType": "GDrive Link",
+                              "downloadUrl": "https://drive.google.com/file/d/1jwzqIhZE3ZXLHbTL82RWsGT2pOLawcbj/view?usp=drive_link",
+                              "icon": "Zadu.png"
+                    }
+          ],
+          "ebooks": [],
+          "systems": []
+};
 
         // ==========================================
         // ⚡ APPLICATION MANAGEMENT ENGINE
@@ -344,5 +366,7 @@
             alert('New master codebase copied successfully! Open your index.html file on GitHub, select everything, paste this over it, and commit.');
         }
     </script>
-</body>
+
+
+</body></html>
 </html>
