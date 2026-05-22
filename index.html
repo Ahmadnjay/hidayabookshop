@@ -1,414 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HidayaBookshop Digital Hub</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/font/lucide.min.css">
-    <style>
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 3px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arabic Quiz Practice</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
+<body class="bg-gradient-to-br from-green-100 to-emerald-200 min-h-screen flex items-center justify-center p-4">
+  <div class="bg-white rounded-3xl shadow-2xl p-6 max-w-4xl w-full grid md:grid-cols-2 gap-6">
+    <div>
+      <h1 class="text-3xl font-bold text-emerald-700 mb-4">Arabic Quiz Practice</h1>
+      <p class="text-gray-600 mb-4">Practice Arabic speaking with microphone and webcam support.</p>
 
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
-            <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('apps')">
-                <div class="bg-emerald-600 text-white p-2 rounded-xl shadow-md shadow-emerald-100 flex items-center justify-center">
-                    <i class="lucide-book-open text-xl"></i>
-                </div>
-                <div>
-                    <h1 class="text-lg font-bold text-slate-900 leading-tight tracking-tight">HidayaBookshop</h1>
-                    <p class="text-xs text-emerald-600 font-semibold tracking-wider uppercase">Digital Hub</p>
-                </div>
-            </div>
-
-            <div class="flex-1 max-w-xl relative">
-                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                    <i class="lucide-search text-sm"></i>
-                </div>
-                <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Search apps, tools, resources..." class="w-full pl-10 pr-4 py-2 bg-slate-100 border-0 rounded-xl focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none text-sm transition-all duration-200">
-            </div>
-
-            <nav class="flex items-center gap-2">
-                <button onclick="switchTab('apps')" id="nav-apps" class="px-3 py-2 rounded-lg text-sm font-medium text-emerald-600 bg-emerald-50 flex items-center gap-2 transition-all">
-                    <i class="lucide-layout-grid text-sm"></i> <span class="hidden sm:inline">Storefront</span>
-                </button>
-                <button onclick="switchTab('console')" id="nav-console" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-100 flex items-center gap-2 transition-all">
-                    <i class="lucide-terminal text-sm"></i> <span class="hidden sm:inline">Developer Console</span>
-                </button>
-            </nav>
-        </div>
-    </header>
-
-    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        
-        <div id="tab-apps" class="space-y-8">
-            <div class="flex items-center gap-2 overflow-x-auto pb-2 custom-scrollbar">
-                <button onclick="filterCategory('all')" id="cat-all" class="px-4 py-1.5 bg-emerald-600 text-white text-xs font-semibold rounded-full shadow-sm transition-all whitespace-nowrap">All Items</button>
-                <button onclick="filterCategory('educational')" id="cat-educational" class="px-4 py-1.5 bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 text-xs font-medium rounded-full transition-all whitespace-nowrap">Educational</button>
-                <button onclick="filterCategory('management')" id="cat-management" class="px-4 py-1.5 bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 text-xs font-medium rounded-full transition-all whitespace-nowrap">Management Systems</button>
-                <button onclick="filterCategory('utilities')" id="cat-utilities" class="px-4 py-1.5 bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 text-xs font-medium rounded-full transition-all whitespace-nowrap">Utilities & Tools</button>
-            </div>
-
-            <div id="appsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                </div>
+      <div class="space-y-4">
+        <div class="bg-emerald-50 p-4 rounded-2xl">
+          <h2 class="font-bold text-xl mb-2">Question</h2>
+          <p id="question" class="text-2xl text-right font-semibold">مَا اسْمُكَ؟</p>
+          <p class="text-gray-500 mt-2">What is your name?</p>
         </div>
 
-        <div id="tab-console" class="hidden space-y-6">
-            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-                <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
-                    <div>
-                        <h2 class="text-xl font-bold text-slate-900">Developer Cloud Console</h2>
-                        <p class="text-sm text-slate-500">Host, upload, and instantly publish new applications to the storefront.</p>
-                    </div>
-                    <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">Active Workspace</span>
-                </div>
+        <button onclick="startRecognition()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-3 rounded-xl w-full font-bold transition">
+          🎤 Start Speaking
+        </button>
 
-                <form id="uploadForm" onsubmit="handleFormSubmit(event)" class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Application Name</label>
-                            <input type="text" id="appName" required placeholder="e.g., Al-Bayan Arabic Dictionary" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50 focus:bg-white transition-all">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Category</label>
-                            <select id="appCategory" required class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50 focus:bg-white transition-all">
-                                <option value="educational">Educational</option>
-                                <option value="management">Management Systems</option>
-                                <option value="utilities">Utilities & Tools</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Short Subtitle / Tagline</label>
-                        <input type="text" id="appTagline" required placeholder="Brief one-line summary for card previews..." class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50 focus:bg-white transition-all">
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Detailed System / Book Description</label>
-                        <textarea id="appDescription" rows="4" required placeholder="Provide comprehensive documentation, installation notes, or asset overviews..." class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50 focus:bg-white transition-all"></textarea>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Version</label>
-                            <input type="text" id="appVersion" placeholder="v1.0.0" required class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50 focus:bg-white transition-all">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">File Weight / Size</label>
-                            <input type="text" id="appSize" placeholder="4.2 MB" required class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50 focus:bg-white transition-all">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Icon Representation</label>
-                            <select id="appIcon" required class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50 focus:bg-white transition-all">
-                                <option value="lucide-book">Book Icon</option>
-                                <option value="lucide-graduation-cap">Academic Cap Icon</option>
-                                <option value="lucide-calculator">Calculator Icon</option>
-                                <option value="lucide-database">Database / System Icon</option>
-                                <option value="lucide-globe">Web / Platform Icon</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Binary File Deployment Link (Google Drive / Direct URL)</label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                                <i class="lucide-link-2 text-sm"></i>
-                            </div>
-                            <input type="url" id="appLink" required placeholder="https://drive.google.com/uc?export=download&id=..." class="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50 focus:bg-white transition-all">
-                        </div>
-                        <p class="text-[11px] text-slate-400 mt-1.5">For optimal architecture, convert standard share links into direct-download variants.</p>
-                    </div>
-
-                    <div class="flex justify-end pt-2">
-                        <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm px-6 py-2.5 rounded-xl transition-all shadow-md shadow-emerald-100 flex items-center gap-2">
-                            <i class="lucide-rocket text-sm"></i> Launch Application
-                        </button>
-                    </div>
-                </form>
-            </div>
+        <div class="bg-gray-100 rounded-2xl p-4">
+          <h3 class="font-bold mb-2">Your Answer:</h3>
+          <p id="result" class="text-lg text-gray-700">Waiting for speech...</p>
         </div>
-    </main>
 
-    <footer class="bg-white border-t border-slate-200 py-6 mt-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-            <p>&copy; 2026 HidayaBookshop Digital Hub. All Rights Reserved.</p>
-            <div class="flex items-center gap-4 font-medium text-slate-600">
-                <a href="#" onclick="switchTab('apps')" class="hover:text-emerald-600 transition-all">Storefront Ecosystem</a>
-                <span>&bull;</span>
-                <a href="#" onclick="switchTab('console')" class="hover:text-emerald-600 transition-all">Developer Hub</a>
-            </div>
-        </div>
-    </footer>
-
-    <div id="appModal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-            <div class="p-6 border-b border-slate-100 flex items-start justify-between gap-4 bg-slate-50">
-                <div class="flex items-start gap-4">
-                    <div id="modalIconContainer" class="bg-emerald-600 text-white p-4 rounded-2xl shadow-md flex items-center justify-center text-3xl">
-                        <i id="modalIcon" class="lucide-book"></i>
-                    </div>
-                    <div>
-                        <h3 id="modalName" class="text-xl font-bold text-slate-900 leading-tight">App Name</h3>
-                        <p id="modalTagline" class="text-sm text-slate-500 mt-0.5">Short tagline representing functionality</p>
-                        <div class="flex flex-wrap items-center gap-2 mt-2">
-                            <span id="modalCategory" class="bg-slate-200 text-slate-700 font-semibold px-2 py-0.5 rounded text-[10px] uppercase tracking-wider">Category</span>
-                            <span id="modalSize" class="bg-emerald-50 text-emerald-700 font-semibold px-2 py-0.5 rounded text-[10px] uppercase tracking-wider">Size</span>
-                            <span id="modalVersion" class="bg-blue-50 text-blue-700 font-semibold px-2 py-0.5 rounded text-[10px] uppercase tracking-wider">Version</span>
-                        </div>
-                    </div>
-                </div>
-                <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 p-1 rounded-lg hover:bg-slate-200/50 transition-all">
-                    <i class="lucide-x text-xl"></i>
-                </button>
-            </div>
-
-            <div class="p-6 overflow-y-auto custom-scrollbar flex-1 space-y-4">
-                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400">Detailed Documentation & Asset Profile</h4>
-                <p id="modalDescription" class="text-sm text-slate-600 leading-relaxed whitespace-pre-wrap">Detailed multi-line description text goes here...</p>
-            </div>
-
-            <div class="p-4 bg-slate-50 border-t border-slate-100 flex justify-end">
-                <a id="modalDownloadBtn" href="#" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm px-6 py-2.5 rounded-xl shadow-md transition-all flex items-center gap-2">
-                    <i class="lucide-download text-sm"></i> Download Package
-                </a>
-            </div>
-        </div>
+        <button onclick="nextQuestion()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl w-full font-bold transition">
+          Next Question
+        </button>
+      </div>
     </div>
 
-    <script>
-        // Seed Database Array
-        let catalog = [
-            {
-                id: "h-01",
-                name: "Mai Mazarkwaila BDC Engine",
-                tagline: "Dynamic Currency Conversion Platform & Admin Portal",
-                description: "The official web hub engineered for Mai Mazarkwaila Bureau De Change. Features an end-to-end interactive currency conversion system parsing live market indicators, alongside an authenticated internal administrative dashboard. Includes the programmatic HTML5 Canvas graphics generator allowing staff to synthesize real-time rate sheets directly into flat high-fidelity PNG flyers instantly deployable to WhatsApp marketing networks.",
-                category: "management",
-                version: "v1.1.4",
-                size: "1.2 MB",
-                icon: "lucide-calculator",
-                downloadUrl: "https://drive.google.com/"
-            },
-            {
-                id: "h-02",
-                name: "Advanced Chemistry Presentation",
-                tagline: "High-Fidelity Comprehensive Academic Slides (50+ Deck)",
-                description: "A meticulously organized, production-grade 50+ slide structural learning package covering technical principles of Chemistry. Designed primarily for post-secondary and continuous modular lecture structures, parsing theoretical models down into digestible layouts, customized visual spacing rules, and programmatic learning checklists.",
-                category: "educational",
-                version: "v1.0.0",
-                size: "42.8 MB",
-                icon: "lucide-graduation-cap",
-                downloadUrl: "https://drive.google.com/"
-            },
-            {
-                id: "h-03",
-                name: "School Administration Framework",
-                tagline: "Relational Database Blueprint & Tracking Management System",
-                description: "A centralized, scalable back-end architecture scheme and front-end mock wireframe tracking node built to coordinate continuous school metrics. Integrates complex relational properties schema logic governing student profiling, financial statement ledgers, administrative roll calls, and departmental staff records across a single, zero-bloat pipeline.",
-                category: "management",
-                version: "v2.0.1",
-                size: "8.5 MB",
-                icon: "lucide-database",
-                downloadUrl: "https://drive.google.com/"
-            }
-        ];
+    <div>
+      <div class="bg-black rounded-3xl overflow-hidden shadow-lg">
+        <video id="webcam" autoplay playsinline class="w-full h-[400px] object-cover"></video>
+      </div>
 
-        let activeCategory = 'all';
-        let currentSearchQuery = '';
+      <div class="mt-4 bg-yellow-50 border border-yellow-200 rounded-2xl p-4">
+        <h3 class="font-bold text-yellow-700 mb-2">Instructions</h3>
+        <ul class="list-disc ml-5 text-sm text-gray-700 space-y-1">
+          <li>Allow camera and microphone permissions.</li>
+          <li>Read the Arabic question aloud.</li>
+          <li>Your speech will appear below.</li>
+          <li>Works best on Chrome browser.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-        // Window Lifecycle Management - Build Initial Grid Display
-        window.addEventListener('DOMContentLoaded', () => {
-            renderCatalog();
+  <script>
+    const questions = [
+      { arabic: 'مَا اسْمُكَ؟', english: 'What is your name?' },
+      { arabic: 'كَيْفَ حَالُكَ؟', english: 'How are you?' },
+      { arabic: 'أَيْنَ تَسْكُنُ؟', english: 'Where do you live?' },
+      { arabic: 'كَمْ عُمْرُكَ؟', english: 'How old are you?' },
+      { arabic: 'مَاذَا تُحِبُ؟', english: 'What do you like?' }
+    ];
+
+    let current = 0;
+
+    function updateQuestion() {
+      document.getElementById('question').innerText = questions[current].arabic;
+      document.querySelector('.text-gray-500').innerText = questions[current].english;
+      document.getElementById('result').innerText = 'Waiting for speech...';
+    }
+
+    function nextQuestion() {
+      current = (current + 1) % questions.length;
+      updateQuestion();
+    }
+
+    async function setupWebcam() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+          audio: true
         });
+        document.getElementById('webcam').srcObject = stream;
+      } catch (err) {
+        alert('Please allow webcam and microphone access.');
+      }
+    }
 
-        // Tab Router Mechanism
-        function switchTab(targetTab) {
-            const tabs = ['apps', 'console'];
-            tabs.forEach(tab => {
-                const view = document.getElementById(`tab-${tab}`);
-                const navBtn = document.getElementById(`nav-${tab}`);
-                
-                if (tab === targetTab) {
-                    view.classList.remove('hidden');
-                    // Style Active Navigation State
-                    navBtn.className = "px-3 py-2 rounded-lg text-sm font-medium text-emerald-600 bg-emerald-50 flex items-center gap-2 transition-all";
-                } else {
-                    view.classList.add('hidden');
-                    // Reset Default Inactive Navigation State
-                    navBtn.className = "px-3 py-2 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-100 flex items-center gap-2 transition-all";
-                }
-            });
-        }
+    function startRecognition() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
-        // Search Interface Hook
-        function handleSearch(query) {
-            currentSearchQuery = query.toLowerCase().trim();
-            renderCatalog();
-        }
+      if (!SpeechRecognition) {
+        alert('Speech Recognition not supported in this browser.');
+        return;
+      }
 
-        // Category Filter Management
-        function filterCategory(category) {
-            activeCategory = category;
-            
-            // Cycle active style states across target category node list
-            const categories = ['all', 'educational', 'management', 'utilities'];
-            categories.forEach(cat => {
-                const btn = document.getElementById(`cat-${cat}`);
-                if (!btn) return;
-                if (cat === category) {
-                    btn.className = "px-4 py-1.5 bg-emerald-600 text-white text-xs font-semibold rounded-full shadow-sm transition-all whitespace-nowrap";
-                } else {
-                    btn.className = "px-4 py-1.5 bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 text-xs font-medium rounded-full transition-all whitespace-nowrap";
-                }
-            });
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'ar-SA';
+      recognition.interimResults = false;
 
-            renderCatalog();
-        }
+      recognition.onstart = () => {
+        document.getElementById('result').innerText = 'Listening...';
+      };
 
-        // Dynamic Compilation Layer for Grid Generation
-        function renderCatalog() {
-            const grid = document.getElementById('appsGrid');
-            grid.innerHTML = '';
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        document.getElementById('result').innerText = transcript;
+      };
 
-            // Filter Dataset via Compound Search Matrix
-            const filteredData = catalog.filter(app => {
-                const matchesCategory = (activeCategory === 'all' || app.category === activeCategory);
-                const matchesSearch = (
-                    app.name.toLowerCase().includes(currentSearchQuery) || 
-                    app.tagline.toLowerCase().includes(currentSearchQuery) || 
-                    app.description.toLowerCase().includes(currentSearchQuery)
-                );
-                return matchesCategory && matchesSearch;
-            });
+      recognition.onerror = (event) => {
+        document.getElementById('result').innerText = 'Error: ' + event.error;
+      };
 
-            if (filteredData.length === 0) {
-                grid.innerHTML = `
-                    <div class="col-span-full py-16 text-center bg-white border border-dashed border-slate-200 rounded-2xl">
-                        <i class="lucide-box text-3xl text-slate-300 mb-2 block mx-auto"></i>
-                        <p class="text-sm font-medium text-slate-500">No applications matching criteria discovered.</p>
-                    </div>
-                `;
-                return;
-            }
+      recognition.start();
+    }
 
-            // Map Array Items to High-Fidelity UI Interface Nodes
-            filteredData.forEach(app => {
-                const card = document.createElement('div');
-                card.className = "bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-xl hover:border-emerald-200 transition-all duration-300 flex flex-col justify-between group cursor-pointer relative top-0 hover:-top-1";
-                card.setAttribute('onclick', `openModal('${app.id}')`);
-                
-                card.innerHTML = `
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="bg-slate-100 group-hover:bg-emerald-50 text-slate-700 group-hover:text-emerald-600 p-3 rounded-xl transition-all flex items-center justify-center text-xl">
-                                <i class="${app.icon || 'lucide-book'}"></i>
-                            </div>
-                            <span class="text-[10px] tracking-wider font-bold text-slate-400 bg-slate-50 group-hover:bg-emerald-100 group-hover:text-emerald-800 transition-all px-2 py-0.5 rounded uppercase">${app.size}</span>
-                        </div>
-                        <h3 class="text-base font-bold text-slate-900 group-hover:text-emerald-700 transition-all leading-snug line-clamp-1">${app.name}</h3>
-                        <p class="text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">${app.tagline}</p>
-                    </div>
-                    <div class="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400 font-medium">
-                        <span class="bg-slate-100 text-slate-600 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide">${app.category}</span>
-                        <div class="flex items-center gap-1 text-emerald-600 font-semibold group-hover:translate-x-0.5 transition-transform">
-                            View Bundle <i class="lucide-chevron-right text-sm"></i>
-                        </div>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        // Active State Modal Trigger Operations
-        function openModal(id) {
-            const app = catalog.find(item => item.id === id);
-            if (!app) return;
-
-            document.getElementById('modalName').innerText = app.name;
-            document.getElementById('modalTagline').innerText = app.tagline;
-            document.getElementById('modalDescription').innerText = app.description;
-            document.getElementById('modalCategory').innerText = app.category;
-            document.getElementById('modalSize').innerText = app.size;
-            document.getElementById('modalVersion').innerText = app.version;
-            
-            // Re-render Dynamic Element Modifiers
-            const modalIcon = document.getElementById('modalIcon');
-            modalIcon.className = app.icon || 'lucide-book';
-
-            const downloadBtn = document.getElementById('modalDownloadBtn');
-            downloadBtn.href = app.downloadUrl;
-
-            // Remove class to render active view overlay
-            const modal = document.getElementById('appModal');
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; // Stop baseline layout scrolling
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('appModal');
-            modal.classList.add('hidden');
-            document.body.style.overflow = ''; // Restore standard body layer scrolling
-        }
-
-        // Close Modal clicking outside container bounding limits
-        window.onclick = function(event) {
-            const modal = document.getElementById('appModal');
-            if (event.target === modal) {
-                closeModal();
-            }
-        }
-
-        // Client Deployment Event Form Interception handler
-        function handleFormSubmit(event) {
-            event.preventDefault();
-
-            // Collect Form Controls data matrix
-            const name = document.getElementById('appName').value;
-            const category = document.getElementById('appCategory').value;
-            const tagline = document.getElementById('appTagline').value;
-            const description = document.getElementById('appDescription').value;
-            const version = document.getElementById('appVersion').value;
-            const size = document.getElementById('appSize').value;
-            const icon = document.getElementById('appIcon').value;
-            const downloadUrl = document.getElementById('appLink').value;
-
-            // Generate unique target identification handle
-            const id = 'h-' + Date.now();
-
-            // Build payload architecture instance 
-            const newApp = { id, name, category, tagline, description, version, size, icon, downloadUrl };
-
-            // Unshift target payload directly to top of run-time inventory stack
-            catalog.unshift(newApp);
-
-            // Re-render catalog display matrix and transition viewport view back to Storefront layout
-            renderCatalog();
-            switchTab('apps');
-
-            // Standard Form element cleanup sequence reset
-            document.getElementById('uploadForm').reset();
-            
-            // Smooth view scroll back to top viewport coordinates
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    </script>
+    setupWebcam();
+    updateQuestion();
+  </script>
 </body>
 </html>
