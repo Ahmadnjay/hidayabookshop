@@ -1,901 +1,205 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>محاكاة اختبار همزة الشامل - 40 سؤالاً للقبول الجامعي</title>
+    <title>Hamza Arabic Proficiency Test Blueprint</title>
     <style>
         :root {
-            --primary: #0d9488;
-            --primary-dark: #0f766e;
-            --bg-main: #f8fafc;
-            --surface: #ffffff;
-            --text-dark: #1e293b;
-            --text-light: #64748b;
-            --border: #e2e8f0;
-            --danger: #ef4444;
-            --success: #22c55e;
-            --accent: #ca8a04;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --primary-color: #1b4d3e; /* Deep Saudi/Islamic Green */
+            --secondary-color: #c5a059; /* Gold accent */
+            --text-dark: #2d3748;
+            --bg-light: #f7fafc;
+            --white: #ffffff;
         }
 
         body {
-            background-color: var(--bg-main);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-light);
             color: var(--text-dark);
-            line-height: 1.6;
-            padding-bottom: 40px;
-        }
-
-        header {
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-            color: white;
-            padding: 15px 30px;
+            margin: 0;
+            padding: 20px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-        }
-
-        .header-title h1 {
-            font-size: 1.4rem;
-            margin-bottom: 4px;
-        }
-        .header-title p {
-            font-size: 0.85rem;
-            opacity: 0.9;
-        }
-
-        .header-meta {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-            font-size: 0.95rem;
-        }
-
-        .timer-box {
-            background: rgba(0,0,0,0.2);
-            padding: 6px 14px;
-            border-radius: 6px;
-            font-family: monospace;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            min-height: 100vh;
         }
 
         .container {
-            max-width: 1300px;
-            margin: 25px auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: 3fr 1fr;
-            gap: 25px;
-        }
-
-        @media (max-width: 950px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .workspace {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
+            background-color: var(--white);
+            max-width: 800px;
+            width: 100%;
             padding: 30px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            min-height: 550px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .proctor-panel {
-            background: var(--surface);
-            border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            height: fit-content;
-            position: sticky;
-            top: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-top: 6px solid var(--primary-color);
         }
 
-        .proctor-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: bold;
-            border-bottom: 2px solid var(--bg-main);
-            padding-bottom: 10px;
-            font-size: 0.9rem;
-        }
-
-        .status-dot {
-            width: 10px;
-            height: 10px;
-            background-color: var(--danger);
-            border-radius: 50%;
-        }
-        .status-dot.active {
-            background-color: var(--success);
-            box-shadow: 0 0 8px var(--success);
-        }
-
-        .feed-container {
-            width: 100%;
-            aspect-ratio: 4/3;
-            background-color: #111827;
-            border-radius: 8px;
-            overflow: hidden;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .feed-container video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transform: scaleX(-1);
-        }
-
-        .feed-placeholder {
-            color: #9ca3af;
-            font-size: 0.85rem;
-            text-align: center;
-            padding: 10px;
-            position: absolute;
-        }
-
-        .mic-bar-wrapper {
-            background: var(--bg-main);
-            border-radius: 4px;
-            height: 8px;
-            width: 100%;
-            overflow: hidden;
-        }
-        .mic-bar {
-            height: 100%;
-            width: 0%;
-            background: var(--success);
-            transition: width 0.1s ease;
-        }
-
-        .step-panel {
-            display: none;
-            flex-direction: column;
-            height: 100%;
-            flex-grow: 1;
-        }
-        .step-panel.active {
-            display: flex;
-        }
-
-        h2.section-title {
-            color: var(--primary-dark);
-            margin-bottom: 15px;
-            border-right: 4px solid var(--primary);
-            padding-right: 10px;
-            font-size: 1.25rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .q-badge {
-            font-size: 0.85rem;
-            background: var(--bg-main);
-            padding: 4px 10px;
-            border-radius: 20px;
-            border: 1px solid var(--border);
-            color: var(--primary-dark);
-        }
-
-        .instructions {
-            background-color: #f0fdfa;
-            border: 1px solid #ccfbf1;
-            padding: 12px 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-        }
-
-        .reading-passage {
-            background: #fdfbf7;
-            border: 1px solid #f5efe6;
-            padding: 18px;
-            border-radius: 8px;
-            font-size: 1.05rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
-            max-height: 180px;
-            overflow-y: auto;
-            text-align: justify;
-            font-weight: 500;
-        }
-
-        .options-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .option-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 15px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 0.95rem;
-        }
-        .option-item:hover {
-            background-color: var(--bg-main);
-            border-color: var(--primary);
-        }
-        .option-item input {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--primary);
-            cursor: pointer;
-        }
-
-        .option-item.selected-visual {
-            border-color: var(--primary);
-            background-color: #f0fdfa;
-        }
-
-        textarea.essay-input {
-            width: 100%;
-            height: 180px;
-            padding: 15px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 1rem;
-            resize: none;
-            outline: none;
-        }
-        textarea.essay-input:focus {
-            border-color: var(--primary);
-        }
-
-        .counter-row {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 8px;
-            font-size: 0.85rem;
-            color: var(--text-light);
-        }
-
-        .audio-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 30px;
-            gap: 15px;
-            background: var(--bg-main);
-            border-radius: 8px;
-            border: 2px dashed var(--border);
-        }
-
-        .rec-btn {
-            background-color: var(--danger);
-            color: white;
-            border: none;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
-            transition: transform 0.2s;
-        }
-        .rec-btn.recording {
-            animation: pulse 1.5s infinite;
-            background-color: #b91c1c;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
-            70% { box-shadow: 0 0 0 12px rgba(239, 68, 68, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
-        }
-
-        .footer-nav {
-            margin-top: auto;
-            padding-top: 20px;
-            border-top: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .progress-indicator {
-            font-size: 0.9rem;
-            color: var(--text-light);
-        }
-
-        .btn {
-            padding: 10px 22px;
-            border-radius: 6px;
-            font-size: 0.95rem;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.2s;
-            border: none;
-        }
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
-        }
-        .btn-primary:hover {
-            background-color: var(--primary-dark);
-        }
-        .btn-secondary {
-            background-color: #e2e8f0;
-            color: var(--text-dark);
-        }
-        .btn-secondary:hover {
-            background-color: #cbd5e1;
-        }
-        .btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-
-        .perm-btn {
-            background-color: #2563eb;
-            color: white;
-            padding: 12px 24px;
-            font-size: 1rem;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            margin: 20px auto 0;
-            display: block;
-        }
-
-        .score-card {
-            text-align: center;
-            padding: 20px 0;
-        }
-        .score-circle {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            background: #f0fdf4;
-            border: 4px solid var(--success);
-            color: var(--success);
+        h1 {
+            color: var(--primary-color);
+            margin-top: 0;
             font-size: 1.8rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 15px auto;
+            border-bottom: 2px solid #edf2f7;
+            padding-bottom: 10px;
         }
 
-        .review-table-container {
-            margin-top: 25px;
-            max-height: 250px;
-            overflow-y: auto;
-            border: 1px solid var(--border);
+        .subtitle {
+            color: #718096;
+            font-size: 1rem;
+            margin-bottom: 25px;
+        }
+
+        /* Summary Cards */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: #f1f5f2;
+            padding: 15px;
             border-radius: 8px;
+            border-left: 4px solid var(--secondary-color);
+            text-align: center;
         }
 
-        .review-table {
+        .card-val {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .card-lbl {
+            font-size: 0.85rem;
+            color: #4a5568;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Table Styling */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.85rem;
-            text-align: right;
+            margin-top: 10px;
+            text-align: left;
         }
-        .review-table th, .review-table td {
-            padding: 10px;
-            border-bottom: 1px solid var(--border);
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 12px 15px;
+            font-size: 0.95rem;
+            font-weight: 600;
         }
-        .review-table th {
-            background-color: var(--bg-main);
-            position: sticky;
-            top: 0;
+
+        th:first-child {
+            border-top-left-radius: 6px;
+        }
+
+        th:last-child {
+            border-top-right-radius: 6px;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        tr:hover {
+            background-color: #f8fafc;
+        }
+
+        .highlight-count {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .highlight-time {
+            font-weight: bold;
+            color: #2b6cb0;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            th, td {
+                padding: 10px;
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="header-title">
-            <h1>المحاكي المتقدم لاختبار همزة للغة العربية (40 سؤالاً)</h1>
-            <p>Comprehensive Hamza Arabic Proficiency Practice Platform</p>
+<div class="container">
+    <h1>Hamza Test Structure Blueprint</h1>
+    <div class="subtitle">Official exam distribution developed by King Salman Global Academy for Arabic Language</div>
+
+    <!-- Quick Overview Stats -->
+    <div class="summary-grid">
+        <div class="card">
+            <div class="card-val">75 Questions</div>
+            <div class="card-lbl">Total Tasks / Items</div>
         </div>
-        <div class="header-meta">
-            <div>نوع الاختبار: <strong style="color: #fef08a;">أكاديمي / قبول جامعي</strong></div>
-            <div class="timer-box">
-                <span>⏱️</span>
-                <span id="countdown">155:00</span>
-            </div>
+        <div class="card">
+            <div class="card-val">155 Minutes</div>
+            <div class="card-lbl">Total Duration</div>
         </div>
-    </header>
-
-    <div class="container">
-        
-        <main class="workspace" id="exam-workspace">
-            
-            <!-- STEP 0: START AND HARDWARE ACCESS -->
-            <div id="panel-setup" class="step-panel active">
-                <h2 class="section-title">تهيئة متطلبات فحص وإقرار الهوية المشروط</h2>
-                <div class="instructions">
-                    مرحباً بك. نظراً لأن هذا الاختبار يُشترط للقبول الأكاديمي في الجامعات السعودية، يتطلب النظام التحقق التام من الكاميرا والميكروفون لتشغيل خوارزمية المراقبة الحية ومنع الانتحال.
-                </div>
-                <div style="background-color: #fffbeb; border: 1px solid #fef3c7; padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 0.95rem;">
-                    💡 <strong>نصيحة هامة للاختبار الفعلي:</strong> يتكون الاختبار الحقيقي من أسئلة تقيس كفاءتك اللغوية طبقاً للإطار الأوروبي (CEFR). قمنا بتطوير بنك الأسئلة أدناه ليتكون من <strong>40 سؤالاً حقيقياً</strong> يحاكي تماماً التوزيع المؤسسي للاختبار المعتمد.
-                </div>
-                <button class="perm-btn" onclick="startVerificationSuite()">تفعيل البيئة الآمنة وبدء الاختبار</button>
-                <div id="setup-logs" style="text-align:center; margin-top:15px; color:var(--text-light); font-size:0.9rem;"></div>
-            </div>
-
-            <!-- DYNAMIC QUESTIONS PANEL (Steps 1 to 40) -->
-            <div id="panel-qa" class="step-panel">
-                <h2 class="section-title">
-                    <span id="qa-title">عنوان القسم المقدر</span>
-                    <span class="q-badge" id="qa-badge">سؤال 1 من 40</span>
-                </h2>
-                <div class="instructions" id="qa-instructions">تعليمات القسم الحالية...</div>
-                
-                <div class="reading-passage" id="qa-context-box" style="display: none;"></div>
-
-                <p><strong id="qa-question-text">نص السؤال الافتراضي؟</strong></p>
-                <div class="options-list" id="qa-options-container">
-                    <!-- Javascript injection parameters -->
-                </div>
-            </div>
-
-            <!-- ESSAY PANEL (Step 41) -->
-            <div id="panel-essay" class="step-panel">
-                <h2 class="section-title">الكتابة والتعبير الأكاديمي (Writing Component)</h2>
-                <div class="instructions">اكتب مقالاً إنشائياً منظماً لا يقل عن 150 كلمة مستخدماً علامات الترقيم وبنية الجملة السليمة.</div>
-                <p style="margin-bottom: 15px; font-weight: bold;" id="essay-prompt-text">
-                    الموضوع: يتجه التطور التقني إلى أتمتة الوظائف بالاعتماد على الذكاء الاصطناعي. ناقش تداعيات هذا التحول على مستقبل سوق العمل للخريجين الجدد في العالم العربي، مبيناً كيف يمكن للمناهج الجامعية مواكبة هذا التغيير.
-                </p>
-                <textarea class="essay-input" id="essay-input-box" placeholder="اكتب مقالك الأكاديمي هنا برصانة لغوية..." oninput="evaluateWordMetrics()"></textarea>
-                <div class="counter-row">
-                    <span>مؤشر المقال: <strong id="essay-word-count">0</strong> كلمة</span>
-                </div>
-            </div>
-
-            <!-- SPEAKING PANEL (Step 42) -->
-            <div id="panel-speaking" class="step-panel">
-                <h2 class="section-title">المحادثة والاسترسال الشفهي (Speaking Component)</h2>
-                <div class="instructions">لديك دقيقة واحدة للتفكير وتحضير الأفكار، ودقيقتان كاملتان للتحدث بطلاقة مسترسلة.</div>
-                <p style="margin-bottom: 20px; font-size: 1.05rem; line-height: 1.7;">
-                    <strong>سؤال التحدث:</strong> يوصف التعليم والتبادل الثقافي بأنه الجسر الأقوى بين الشعوب. تحدث عن أهمية دراستك الأكاديمية في المملكة العربية السعودية، وكيف تخطط لتوظيف مخرجات هذه التجربة في نقل المعرفة وبناء مجتمعك عند العودة؟
-                </p>
-                <div class="audio-container">
-                    <button class="rec-btn" id="mic-trigger-btn" onclick="handleMicToggle()">🎤</button>
-                    <p id="mic-status-label" style="font-weight: 600; color: var(--text-light);">اضغط على اللاقط وابدأ التحدث بوضوح متناهٍ</p>
-                </div>
-            </div>
-
-            <!-- FINAL SUMMARY SCREEN (Step 43) -->
-            <div id="panel-result" class="step-panel">
-                <div class="score-card">
-                    <div class="score-circle" id="score-percentage-view">0%</div>
-                    <h3 id="score-headline-msg">تم إنجاز الاختبار بنجاح</h3>
-                    <p style="color: var(--text-light); margin-top: 10px; font-size: 0.95rem;">
-                        لقد أكملت محاكاة الـ 40 سؤالاً بالإضافة للمهارات الإنتاجية بنجاح. راجع تفاصيل إجاباتك لقسم الاختيار من متعدد أدناه للوقوف على مستواك:
-                    </p>
-                    
-                    <div class="review-table-container">
-                        <table class="review-table">
-                            <thead>
-                                <tr>
-                                    <th>رقم السؤال</th>
-                                    <th>القسم الرئيسي</th>
-                                    <th>حالة الإجابة</th>
-                                    <th>الإجابة الصحيحة</th>
-                                </tr>
-                            </thead>
-                            <tbody id="review-table-body">
-                                <!-- Computed rows generation -->
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <button class="perm-btn" style="background-color: var(--primary); margin-top: 20px;" onclick="rebootTestEnv()">تصفير وإعادة المحاكاة بالكامل</button>
-                </div>
-            </div>
-
-            <!-- Navigation Controls Footer -->
-            <div class="footer-nav" id="panel-nav-controls" style="display: none;">
-                <button class="btn btn-secondary" id="btn-action-prev" onclick="moveNavigationFrame(-1)">السابق</button>
-                <span class="progress-indicator" id="progress-text-render">السؤال 1 / 40</span>
-                <button class="btn btn-primary" id="btn-action-next" onclick="moveNavigationFrame(1)">التالي</button>
-            </div>
-
-        </main>
-
-        <!-- Proctoring Sidebar Overlay -->
-        <aside class="proctor-panel">
-            <div class="proctor-header">
-                <span class="status-dot" id="proctor-signal-dot"></span>
-                <span id="proctor-signal-text">مستشعر التحقق: بانتظار الإذن</span>
-            </div>
-            
-            <div class="feed-container">
-                <div class="feed-placeholder" id="video-placeholder-label">
-                    بث الكاميرا معطل حالياً.<br>قم بالموافقة على أذونات التصفح الآمن لعرض الواجهة المراقبة.
-                </div>
-                <video id="proctor-video" autoplay playsinline muted></video>
-            </div>
-
-            <div>
-                <p style="font-size: 0.8rem; font-weight: bold; margin-bottom: 5px;">مؤشر التردد والالتقاط الصوتي المستمر:</p>
-                <div class="mic-bar-wrapper">
-                    <div class="mic-bar" id="proctor-mic-bar"></div>
-                </div>
-            </div>
-
-            <div style="font-size: 0.78rem; color: var(--text-light); line-height: 1.4; text-align: justify;">
-                🇸🇦 <strong>متطلبات القبول:</strong> ترسل المنصة الحقيقية تقريراً مفصلاً لعمادة القبول والتسجيل بالجامعة المعنية يتضمن لقطات عشوائية للوجه والتحقق من الهوية الوطنية أو جواز السفر.
-            </div>
-        </aside>
-
+        <div class="card">
+            <div class="card-val">4 Skills</div>
+            <div class="card-lbl">Language Domains</div>
+        </div>
     </div>
 
-    <script>
-        // 40 Authentic CEFR-Aligned Questions Database for Hamza Arabic Certification Exam
-        const questionBank = [
-            // --- SECTION 1: READING COMPHRENSION (1-10) ---
-            { id: 1, type: "قراءة وفهم المقروء", passage: "تعد الهوية الثقافية الركيزة الأساسية لاستقرار المجتمعات وتماسكها في ظل العولمة الجارفة. إن الانفتاح على الثقافات الأخرى لا يعني بحال من الأحوال التخلي عن المقومات اللغوية والتاريخية الأصيلة، بل هو تكامل معرفي يثري العقل الجمعي ويزيده صلابة.", question: "ما الفكرة المحورية التي يطرحها الكاتب في النص السابق؟", options: ["التخلي الكامل عن الخصوصية اللغوية لمواكبة العولمة.", "أهمية الموازنة بين الأصالة الثقافية والانفتاح الفكري المتزن.", "رفض ومقاطعة كل المخرجات المعرفية الغربية بشكل مطلق.", "تراجع المجتمعات وتفككها بسبب التمسك بالتاريخ المعرفي القديم."], correct: 1 },
-            { id: 2, type: "قراءة وفهم المقروء", passage: "تعتمد الرؤية الاقتصادية الحديثة للمملكة على تنويع مصادر الدخل القومي والحد من الاعتماد الكلي على النفط كمحرك أساسي. ويمثل الاستثمار في الثروة البشرية والذكاء الاصطناعي والصناعات التحويلية حجر الزاوية في بناء اقتصاد مستدام وقائم على المعرفة العميقة.", question: "وفقاً للنص، كيف يتحقق الاقتصاد المستدام الخالي من التذبذب؟", options: ["عبر زيادة كميات إنتاج وتصدير النفط الخام.", "من خلال إهمال الموارد البشرية والتركيز على العقارات فقط.", "بتنويع الموارد والاستثمار الفعلي في المعرفة والتقنيات الحديثة.", "عبر خفض مستويات التعليم العالي والاعتماد على الاستيراد الأجنبي."], correct: 2 },
-            { id: 3, type: "قراءة وفهم المقروء", passage: "تعتبر المياه الجوفية في المناطق الجافة ثروة إستراتيجية نادرة تستوجب الإدارة الرشيدة والدقيقة. إن الهدر غير المبرر في قطاع الزراعة التقليدية يؤدي إلى استنزاف الطبقات الصخرية الحاملة للمياه، مما يهدد أمن الأجيال القادمة المائي بشكل مباشر.", question: "أي من الممارسات التالية يصنف كسبب أساسي لاستنزاف الموارد المائية بناءً على النص؟", options: ["استخدام وسائل الري الحديثة والمرشدة.", "الهدر المائي الناتج عن أنماط الزراعة التقليدية.", "تخزين مياه الأمطار في السدود المخصصة لها.", "التوسع في مشاريع تحلية مياه البحار والمحيطات."], correct: 1 },
-            { id: 4, type: "قراءة وفهم المقروء", passage: "اللغة العربية ليست مجرد أداة للتخاطب اليومي، بل هي وعاء الفكر والحضارة والقرآن الكريم. إن الحفاظ على فصاحتها وتدريسها بأساليب جاذبة للأجيال الناشئة يعد واجباً قومياً ودينياً يحمي الهوية من التفتت والذوبان في اللغات الأخرى.", question: "بماذا وصف الكاتب اللغة العربية في النص السابق؟", options: ["أنها وسيلة ثانوية للتواصل التجاري فقط.", "وعاء الفكر والحضارة وحافظة الهوية من التفتت والذوبان.", "لغة معقدة لا يمكن تطويعها للعلوم الحديثة المعاصرة.", "أداة تخاطب مؤقتة تنتهي بانتهاء العصر الحالي."], correct: 1 },
-            { id: 5, type: "قراءة وفهم المقروء", passage: "لعبت التجارة عبر الجزيرة العربية دوراً محورياً في ربط الشرق بالغرب منذ القدم. ولم تكن القوافل تنقل البضائع والمحاصيل الثمينة مثل البخور والتوابل فحسب، بل كانت قنوات لنقل الأفكار، والثقافات، والأنماط المعمارية بين الأمم.", question: "ما هو الأثر غير المادي لحركة القوافل التجارية المذكور في النص؟", options: ["زيادة أسعار التوابل والبخور في الأسواق المحلية.", "تبادل الأفكار وتلاقح الثقافات والأنماط المعمارية بين الشعوب.", "تدمير العلاقات السياسية بين دول الشرق والغرب القديم.", "توقف التطوير العمراني في محطات الاستراحة القديمة."], correct: 1 },
-            { id: 6, type: "قراءة وفهم المقروء", passage: "يرى علماء النفس أن القراءة الحرة في سن الطفولة تسهم بشكل مباشر في صياغة الذكاء العاطفي والقدرة على التخيل الابتكاري. فالطفل الذي يقرأ يكتسب قدرة فريدة على وضع نفسه مكان الآخرين، مما ينمي مهارة التعاطف الاجتماعي لديه.", question: "بناءً على النص، ما فائدة القراءة الحرة للطفل في صياغة شخصيته؟", options: ["زيادة مهارات العزلة والابتعاد الفعلي عن المجتمع المعاش.", "تنمية الذكاء العاطفي، والتخيل الابتكاري، والتعاطف الاجتماعي.", "إضعاف التحصيل الدراسي الفعلي في المواد التطبيقية كالحساب.", "تسريع وتيرة النمو العضلي والبدني بشكل غير طبيعي."], correct: 1 },
-            { id: 7, type: "قراءة وفهم المقروء", passage: "ظاهرة التغير المناخي لم تعد تهديداً مستقبلياً بل واقعاً ملموساً يتجلى في موجات الجفاف غير المسبوقة وفيضانات في مناطق أخرى. إن مواجهة هذا الخطر تتطلب التزاماً دولياً صارماً لخفض الانبعاثات الكربونية والتحول للطاقة النظيفة.", question: "ما هو المطلب الأساسي الذي شدد عليه النص لمواجهة واقع التغير المناخي؟", options: ["تجاهل الاتفاقيات الدولية والاعتماد على الحلول الفردية.", "الالتزام الدولي الصارم بخفض انبعاثات الكربون والتحول للطاقة النظيفة.", "زيادة استخدام الفحم الحجري لتوليد الطاقة الرخيصة.", "إيقاف مشاريع التنمية المستدامة في الدول النامية كلياً."], correct: 1 },
-            { id: 8, type: "قراءة وفهم المقروء", passage: "المخطوطات العربية الإسلامية المحفوظة في خزانة التراث العالمي تمثل شاهداً حياً على العصر الذهبي للعلوم. إن رقمنة هذه المخطوطات وإتاحتها للباحثين يساهم في إعادة قراءة التاريخ العلمي وتصحيح الكثير من المفاهيم المغلوطة.", question: "ما هي الأهمية المباشرة لعملية \"رقمنة المخطوطات\" كما وردت في النص؟", options: ["التخلص من النسخ الورقية القديمة وحرقها لعدم الحاجة لها.", "إعادة قراءة التاريخ العلمي وتصحيح المفاهيم المغلوطة للباحثين.", "احتكار المعرفة التاريخية وجعلها مدفوعة الثمن بشكل باهظ.", "تحويل المخطوطات الأثرية إلى لوحات فنية للزينة فقط."], correct: 1 },
-            { id: 9, type: "قراءة وفهم المقروء", passage: "المدينة الذكية ليست تلك التي تمتلئ بالشاشات والتقنيات المعقدة فحسب، بل هي البيئة التي توظف البيانات لرفع جودة حياة الإنسان، وتسهيل تنقله، وتقليل الهدر في الطاقة، وحماية البيئة المحيطة به بشكل تلقائي.", question: "ما هو المعيار الحقيقي لنجاح \"المدينة الذكية\" طبقاً للنص؟", options: ["كثرة الشاشات والمظاهر التكنولوجية المعقدة والبراقة بالديكور.", "توظيف البيانات لرفع جودة حياة الإنسان وحماية بيئته وتقليل الهدر.", "إلغاء وسائل النقل العامة والاعتماد على المركبات الخاصة فقط.", "ارتفاع تكلفة المعيشة والخدمات الأساسية المقدمة للسكان."], correct: 1 },
-            { id: 10, type: "قراءة وفهم المقروء", passage: "الترجمة الأكاديمية الدقيقة تستلزم من المترجم أن يكون عالماً بالخلفية الثقافية والسياق الحضاري للنص الأصلي، وليس فقط ضليعاً بالقواعد اللغوية؛ فالمصطلحات تكتسب دلالاتها الحقيقية من الممارسات الاجتماعية والبيئية لأصحاب اللغة.", question: "وفقاً للنص، ما الذي تحتاجه الترجمة الأكاديمية إلى جانب القواعد اللغوية؟", options: ["سرعة الطباعة على أجهزة الحاسوب الحديثة.", "إلمام المترجم بالخلفية الثقافية والسياق الحضاري للنص الأصلي.", "ترجمة الكلمات بشكل حرفي وقاموسي دون النظر للموقع.", "تغيير أسماء الشخصيات لتتناسب مع رغبة المترجم الذاتية."], correct: 1 },
+    <!-- Main Data Table -->
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>Section / Skill</th>
+                    <th>Format Overview</th>
+                    <th>Questions</th>
+                    <th>Duration</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>1. Listening Comprehension</strong></td>
+                    <td>Multiple-choice items based on diverse academic audio recordings &amp; conversations.</td>
+                    <td class="highlight-count">30 Questions</td>
+                    <td class="highlight-time">35 Mins</td>
+                </tr>
+                <tr>
+                    <td><strong>2. Reading Comprehension</strong></td>
+                    <td>Multiple-choice items focused on vocabulary, syntax, and complex text analysis.</td>
+                    <td class="highlight-count">40 Questions</td>
+                    <td class="highlight-time">60 Mins</td>
+                </tr>
+                <tr>
+                    <td><strong>3. Written Expression</strong></td>
+                    <td>Producing a unified, structured academic essay on an assigned prompt (200–250 words).</td>
+                    <td class="highlight-count">1 Question</td>
+                    <td class="highlight-time">40 Mins</td>
+                </tr>
+                <tr>
+                    <td><strong>4. Spoken Expression</strong></td>
+                    <td>Automated speaking tasks (direct questions, target object descriptions, and dialogues).</td>
+                    <td class="highlight-count">4 Sections</td>
+                    <td class="highlight-time">20 Mins</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
-            // --- SECTION 2: GRAMMAR & STRUCTURES (11-25) ---
-            { id: 11, type: "التراكيب والقواعد", question: "اختر الكلمة الصحيحة إملائياً لملء الفراغ: حضر الطالبُ الذي ........ بالجائزة الأولى.", options: ["تفوءَ", "تفوّقَ", "تفوقن", "تفوقتُ"], correct: 1 },
-            { id: 12, type: "التراكيب والقواعد", question: "ما هي العلامة الإعرابية الصحيحة لجمع المؤنث السالم في حالة النصب (مثل: كافأتُ المعلماتِ)؟", options: ["الفتحة الظاهرة على آخره.", "الكسرة نيابة عن الفتحة.", "الألف الساكنة.", "الياء والنون المكسورة."], correct: 1 },
-            { id: 13, type: "التراكيب والقواعد", question: "أي الجمل التالية صياغتها النحوية صحيحة وخالية تماماً من الأخطاء؟", options: ["إنَّ المعلمون مخلصون في عملهم.", "إنَّ المعلمينَ مخلصون في عملهم.", "إنَّ المعلمينَ مخلصين في عملهم.", "إنَّ المعلمون مخلصين في عملهم."], correct: 1 },
-            { id: 14, type: "التراكيب والقواعد", question: "اختر الكلمة الصحيحة إملائياً لملء الفراغ: لم ........ أحدٌ من الموظفين عن الاجتماع الطارئ.", options: ["يتغيبْ", "يتغيبا", "يتغيبوا", "يتغيبنَ"], correct: 0 },
-            { id: 15, type: "التراكيب والقواعد", question: "ما هو إعراب كلمة (طالباً) في الجملة التالية: في الصفِّ عشرون طالباً.", options: ["مفعول به منصوب.", "تمييز منصوب وعلامة نصبه الفتحة.", "مضاف إليه مجرور وعلامة جره الكسرة.", "حال منصوب وعلامة نصبه الفتحة الظاهرة."], correct: 1 },
-            { id: 16, type: "التراكيب والقواعد", question: "الأفعال الخمسة تُرفع بـ ........ وتُنصب وتُجزم بـ ........", options: ["ثبوت النون / حذف النون", "الضمة / الفتحة والسكون", "حذف النون / ثبوت النون", "الواو / حذف حرف العلة"], correct: 0 },
-            { id: 17, type: "التراكيب والقواعد", question: "اختر الرسم الإملائي الصحيح للهمزة لملء الفراغ: قرأتُ ........ مفيداً للغاية.", options: ["جزءاً", "جزءن", "جزئاً", "جزءًا"], correct: 3 },
-            { id: 18, type: "التراكيب والقواعد", question: "ما هي الجملة التي تحتوي على فعل مضارع مجزوم بحذف حرف العلة؟", options: ["لا تذهبْ إلى السوق اليوم.", "لم يسعَ الطالبُ في شرٍ قط.", "لن ينجحَ المهملُ في مسعاه.", "المسلمون يصلون الفجر في وقته."], correct: 1 },
-            { id: 19, type: "التراكيب والقواعد", question: "حدد نوع (لا) في الجملة التالية: \"يا محمدُ، لا تكذبْ في قولك\".", options: ["لا النافية للجنس.", "لا النافية للفعل المضارع.", "لا الناهية الجازمة.", "لا العاطفة الساكنة."], correct: 2 },
-            { id: 20, type: "التراكيب والقواعد", question: "اختر الكلمة المناسبة للفراغ: كان المطرُ ........ بغزارة عندما غادرنا المنزل.", options: ["ينهمرُ", "ينهمرَ", "ينهمرْ", "ينهمرنَ"], correct: 0 },
-            { id: 21, type: "التراكيب والقواعد", question: "إعراب الفاعل في لغتنا العربية يكون دائماً في حالة:", options: ["النصب بالفتحة الظاهرة.", "الجر بالكسرة المقدرة.", "الرفع (بالضمة أو ما ينوب عنها).", "الجزم بالسكون المستتر."], correct: 2 },
-            { id: 22, type: "التراكيب والقواعد", question: "أي من الأسماء التالية يصنف من \"الأسماء الخمسة\" ويُرفع بالواو؟", options: ["أبناء", "أبوك", "آباء", "أبوين"], correct: 1 },
-            { id: 23, type: "التراكيب والقواعد", question: "اختر الرسم الإملائي الصحيح لملء الفراغ: إنّ ........ يبعث الطمأنينة في القلوب.", options: ["الهدوءَ", "الهدؤَ", "الهدوئَ", "الهدوءُ"], correct: 0 },
-            { id: 24, type: "التراكيب والقواعد", question: "ما هو الوزن الصرفي الصحيح لكلمة (استغفرَ)؟", options: ["افتعلَ", "انفعلَ", "استفعلَ", "تفعللَ"], correct: 2 },
-            { id: 25, type: "التراكيب والقواعد", question: "حدد الكلمة المبنية في الجملة التالية: \"هذا الطالبُ مجتهدٌ في دروسه\".", options: ["هذا", "الطالبُ", "مجتهدٌ", "دروسه"], correct: 0 },
-
-            // --- SECTION 3: VOCABULARY & SEMANTICS (26-40) ---
-            { id: 26, type: "المفردات والدلالة", question: "ما مرادف كلمة (يجابه) في قولنا: \"يجب على الباحث أن يجابه الصعاب الثقافية بالصبر\"؟", options: ["يتهرب من", "يواجه ويقاوم", "يستسلم لـ", "يتجاهل تماماً"], correct: 1 },
-            { id: 27, type: "المفردات والدلالة", question: "ما ضد كلمة (شَحِيح) في تركيب لغوي مثل: \"كان المطر شحيحاً هذا العام\"؟", options: ["نزيلاً", "غزيراً وو some وفير", "ضعيفاً للغاية", "بارداً وجافاً"], correct: 1 },
-            { id: 28, type: "المفردات والدلالة", question: "ما معنى كلمة (تنقيح) في قولنا: \"قام الأستاذ بتنقيح الرسالة العلمية\"؟", options: ["تهذيبها وتصحيح ما بها من أخطاء وتعديلها.", "إتلافها وحرقها لعدم أهميتها الأكاديمية.", "تأجيل مناقشتها للعام القادم بقرار رسمي.", "نقلها حرفياً من كتاب آخر دون تعديل."], correct: 0 },
-            { id: 29, type: "المفردات والدلالة", question: "اختر الكلمة التي تكمل السياق: \"أقامت الجامعة حفل تخرج ........ بجهود الطلاب المتفوقين\".", options: ["تنديداً", "إشادةً واحتفاءً", "تغاضياً", "استنكاراً"], correct: 1 },
-            { id: 30, type: "المفردات والدلالة", question: "ما هو جمع التكسير الصحيح لكلمة (أثر)؟", options: ["أثير", "آثار", "مؤثرات", "آثارات"], correct: 1 },
-            { id: 31, type: "المفردات والدلالة", question: "ما المعنى الدقيق للتعبير اللغوي (على مَضَض) في جملة: \"وافق الرجل على القرار على مضض\"؟", options: ["بسرور بالغ وفرح شديد.", "بكرهٍ وعدم رضا وإجبار داخلي.", "بسرعة فائقة ودون تفكير.", "بشكل سري للغاية."], correct: 1 },
-            { id: 32, type: "المفردات والدلالة", question: "ما الكلمة المناسبة لملء الفراغ في سياق الجملة: \"يجب على المذيع أن يمتلك ........ لغوية تسعفه بالارتجال\"؟", options: ["حصيلةً وفيرة", "ندرةً واضحة", "عجمةً ظاهرة", "سطحيةً مفرطة"], correct: 0 },
-            { id: 33, type: "المفردات والدلالة", question: "ما معنى كلمة (دَؤوب) في قولنا: \"يعمل الباحث بشكل دؤوب لإنهاء دراسته\"؟", options: ["متقطع وكسول.", "مستمر بجد ونشاط دون كلل.", "بطيء وغير مكترث.", "مؤقت ليوم واحد فقط."], correct: 1 },
-            { id: 34, type: "المفردات والدلالة", question: "اختر الكلمة المقابلة (الضد) لكلمة (الإفراط):", options: ["التفريط أو الزهد الشديد", "الإسراف", "المبالغة", "التكلف"], correct: 0 },
-            { id: 35, type: "المفردات والدلالة", question: "ما معنى كلمة (عَقِيم) في السياق الفكري: \"دار بين الطرفين نقاش عقيم لم يفضِ لشيء\"؟", options: ["مثمر ومليء بالنتائج العظيمة.", "غير ناتج عن فائدة أو بلا طائل.", "سريع وقصير المدة.", "عنيف للغاية وأدى لخصومة."], correct: 1 },
-            { id: 36, type: "المفردات والدلالة", question: "ما مرادف كلمة (الرّصانة) في قولنا: \"يتميز أسلوب الكاتب بالرصانة والوضوح\"؟", options: ["الركاكة والضعف", "المتانة، الإحكام والرزانة", "التعقيد والغموض", "العجلة والخفة"], correct: 1 },
-            { id: 37, type: "المفردات والدلالة", question: "اختر المفرد الصحيح لكلمة (أطروحات):", options: ["طرح", "أطروحة", "طراحه", "طوارح"], correct: 1 },
-            { id: 38, type: "المفردات والدلالة", question: "ما معنى كلمة (الوهن) في الجملة: \"أصاب الجسدَ وهنٌ شديد بعد السفر الطويل\"؟", options: ["قوة وطاقة متجددة.", "ضعف واسترخاء ونقص في القوة.", "مرونة ورشاقة بدنية.", "برودة شديدة في الأطراف."], correct: 1 },
-            { id: 39, type: "المفردات والدلالة", question: "مكمّل السياق الصحيح: \"التخطيط المسبق والمحكم هو الدعامة ........ للنجاح الأكاديمي\".", options: ["الهامشية", "الأساسية والكبرى", "المؤقتة", "المنعدمة"], correct: 1 },
-            { id: 40, type: "المفردات والدلالة", question: "ما معنى كلمة (حَثِيث) في عبارة: \"تبذل المملكة جهوداً حثيثة لتطوير البنية التحتية التعليمية\"؟", options: ["بطيئة ومتأخرة عن الوقت.", "سريعة، متواصلة وجادة.", "موسمية تنقطع باستمرار.", "محدودة الأثر والنطاق."], correct: 1 }
-        ];
-
-        // System State parameters
-        let currentPointer = 0; // 0 = Setup, 1 to 40 = Qs, 41 = Essay, 42 = Speaking, 43 = Results
-        let userSelections = {}; 
-        let countdownSeconds = 155 * 60;
-        let timerClockId = null;
-        let isAudioCapturing = false;
-        let hardwareStream = null;
-        let micIntervalProcessor = null;
-
-        // Navigation frame controller
-        function refreshFrameDisplay() {
-            // Hide all sub containers first
-            document.getElementById('panel-setup').classList.remove('active');
-            document.getElementById('panel-qa').classList.remove('active');
-            document.getElementById('panel-essay').classList.remove('active');
-            document.getElementById('panel-speaking').classList.remove('active');
-            document.getElementById('panel-result').classList.remove('active');
-
-            const navBar = document.getElementById('panel-nav-controls');
-
-            if (currentPointer === 0) {
-                // Intro Setup screen
-                document.getElementById('panel-setup').classList.add('active');
-                navBar.style.display = 'none';
-            } else if (currentPointer >= 1 && currentPointer <= 40) {
-                // Questions Screen
-                document.getElementById('panel-qa').classList.add('active');
-                navBar.style.display = 'flex';
-                document.getElementById('progress-text-render').innerText = `سؤال ${currentPointer} / 40`;
-                loadQuestionData(currentPointer - 1);
-            } else if (currentPointer === 41) {
-                // Essay Screen
-                document.getElementById('panel-essay').classList.add('active');
-                navBar.style.display = 'flex';
-                document.getElementById('progress-text-render').innerText = "قسم التعبير الكتابي";
-            } else if (currentPointer === 42) {
-                // Speaking Screen
-                document.getElementById('panel-speaking').classList.add('active');
-                navBar.style.display = 'flex';
-                document.getElementById('progress-text-render').innerText = "قسم المحادثة الشفهية";
-                document.getElementById('btn-action-next').innerText = "إنهاء وإرسال التقييم";
-            } else if (currentPointer === 43) {
-                // Final Results Screen
-                document.getElementById('panel-result').classList.add('active');
-                navBar.style.display = 'none';
-                calculateAndRenderResultsSummary();
-            }
-
-            // Boundary control for back navigation button
-            if (currentPointer > 0 && currentPointer < 43) {
-                document.getElementById('btn-action-prev').disabled = (currentPointer === 1);
-            }
-            if (currentPointer !== 42) {
-                document.getElementById('btn-action-next').innerText = "التالي";
-            }
-        }
-
-        function moveNavigationFrame(direction) {
-            currentPointer += direction;
-            refreshFrameDisplay();
-            // Scroll layout view smoothly to top when switching panels
-            document.getElementById('exam-workspace').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Question Loader Factory
-        function loadQuestionData(index) {
-            const data = questionBank[index];
-            document.getElementById('qa-title').innerText = `قسم: ${data.type}`;
-            document.getElementById('qa-badge').innerText = `سؤال ${index + 1} من 40`;
-            
-            const contextBox = document.getElementById('qa-context-box');
-            if (data.passage) {
-                contextBox.innerText = data.passage;
-                contextBox.style.display = 'block';
-                document.getElementById('qa-instructions').innerText = "اقرأ النص الأكاديمي بتمعن، ثم أجب عن الإيجاز المتصل به:";
-            } else {
-                contextBox.style.display = 'none';
-                document.getElementById('qa-instructions').innerText = "اختر الإجابة الصحيحة نحوياً وإملائياً لتكملة هيكل الجملة المفيدة:";
-            }
-
-            document.getElementById('qa-question-text').innerText = `${index + 1}. ${data.question}`;
-            
-            // Build options lists dynamically
-            const container = document.getElementById('qa-options-container');
-            container.innerHTML = '';
-
-            data.options.forEach((optText, optIdx) => {
-                const label = document.createElement('label');
-                label.className = 'option-item';
-                
-                // Keep persistent checkmark UI state during back and forth navigation
-                if (userSelections[data.id] === optIdx) {
-                    label.classList.add('selected-visual');
-                }
-
-                const radio = document.createElement('input');
-                radio.type = 'radio';
-                radio.name = `exam-q-${data.id}`;
-                radio.value = optIdx;
-                radio.checked = (userSelections[data.id] === optIdx);
-                
-                radio.onchange = function() {
-                    userSelections[data.id] = optIdx;
-                    // Reset styling focus classes on sibling children components
-                    document.querySelectorAll('.option-item').forEach(el => el.classList.remove('selected-visual'));
-                    label.classList.add('selected-visual');
-                };
-
-                label.appendChild(radio);
-                const span = document.createElement('span');
-                span.innerText = optText;
-                label.appendChild(span);
-                container.appendChild(label);
-            });
-        }
-
-        // Essay analytics counter
-        function evaluateWordMetrics() {
-            const rawText = document.getElementById('essay-input-box').value.trim();
-            const tokenizedWords = rawText === "" ? 0 : rawText.split(/\s+/).length;
-            document.getElementById('essay-word-count').innerText = tokenizedWords;
-        }
-
-        // Speaking mock integration logic
-        function handleMicToggle() {
-            const trigger = document.getElementById('mic-trigger-btn');
-            const label = document.getElementById('mic-status-label');
-
-            if (!isAudioCapturing) {
-                isAudioCapturing = true;
-                trigger.classList.add('recording');
-                label.innerText = "جاري تسجيل نبرة صوتك وتحليل التدفق اللغوي... استمر بالتحدث.";
-                label.style.color = "var(--danger)";
-            } else {
-                isAudioCapturing = false;
-                trigger.classList.remove('recording');
-                label.innerText = "تم حفظ ملف الاسترسال الصوتي محلياً بنجاح بنظام الفحص الدائم.";
-                label.style.color = "var(--success)";
-            }
-        }
-
-        // Hardware acquisition module
-        async function startVerificationSuite() {
-            const logs = document.getElementById('setup-logs');
-            logs.innerText = "جاري تفعيل الاتصال والتحقق من صلاحيات الأمان الأكاديمي...";
-            logs.style.color = "var(--text-light)";
-
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-                hardwareStream = stream;
-
-                document.getElementById('proctor-video').srcObject = stream;
-                document.getElementById('video-placeholder-label').style.display = 'none';
-                
-                document.getElementById('proctor-signal-dot').classList.add('active');
-                document.getElementById('proctor-signal-text').innerText = "مستشعر التحقق: مراقبة حية نشطة";
-
-                initializeLiveMicFeed(stream);
-                initiateCountdownClock();
-
-                // Advance system to question frame 1
-                currentPointer = 1;
-                refreshFrameDisplay();
-            } catch (err) {
-                console.error(err);
-                logs.innerText = "خطأ أمني: تعذر الاتصال بالوسائط. يرجى تفعيل الصلاحيات من شريط العنوان العلوي للمتصفح والمحاولة مرة أخرى.";
-                logs.style.color = "var(--danger)";
-            }
-        }
-
-        function initializeLiveMicFeed(stream) {
-            try {
-                const ctx = new (window.AudioContext || window.webkitAudioContext)();
-                const src = ctx.createMediaStreamSource(stream);
-                const analyzer = ctx.createAnalyser();
-                analyzer.fftSize = 256;
-                src.connect(analyzer);
-
-                const bufferLen = analyzer.frequencyBinCount;
-                const dataArray = new Uint8Array(bufferLen);
-                const targetBar = document.getElementById('proctor-mic-bar');
-
-                micIntervalProcessor = setInterval(() => {
-                    analyzer.getByteFrequencyData(dataArray);
-                    let sum = 0;
-                    for(let i=0; i<bufferLen; i++) { sum += dataArray[i]; }
-                    let average = sum / bufferLen;
-                    let scaledAmplitude = Math.min(100, Math.floor((average / 128) * 100));
-                    targetBar.style.width = scaledAmplitude + '%';
-                }, 100);
-            } catch(e) {
-                // Fallback automated animation loop for sandboxed configurations lacking AudioContext
-                let toggleState = false;
-                micIntervalProcessor = setInterval(() => {
-                    document.getElementById('proctor-mic-bar').style.width = toggleState ? '35%' : '12%';
-                    toggleState = !toggleState;
-                }, 250);
-            }
-        }
-
-        function initiateCountdownClock() {
-            clearInterval(timerClockId);
-            timerClockId = setInterval(() => {
-                let m = Math.floor(countdownSeconds / 60);
-                let s = Math.floor(countdownSeconds % 60);
-
-                m = m < 10 ? '0' + m : m;
-                s = s < 10 ? '0' + s : s;
-
-                document.getElementById('countdown').innerText = `${m}:${s}`;
-
-                if (countdownSeconds <= 0) {
-                    clearInterval(timerClockId);
-                    currentPointer = 43;
-                    refreshFrameDisplay();
-                    alert('انقضى الوقت الإجمالي المسموح به للاختبار. تم ترحيل إجاباتك للنظام تلقائياً.');
-                } else {
-                    countdownSeconds--;
-                }
-            }, 1000);
-        }
-
-        // Calculation & Summary Compilation System
-        function calculateAndRenderResultsSummary() {
-            let correctAnswersCount = 0;
-            const tableBody = document.getElementById('review-table-body');
-            tableBody.innerHTML = '';
-
-            questionBank.forEach((q, idx) => {
-                const userAns = userSelections[q.id];
-                const isCorrect = (userAns === q.correct);
-                if (isCorrect) correctAnswersCount++;
-
-                const row = document.createElement('tr');
-                
-                const tdNum = document.createElement('td');
-                tdNum.innerText = idx + 1;
-                row.appendChild(tdNum);
-
-                const tdType = document.createElement('td');
-                tdType.innerText = q.type;
-                row.appendChild(tdType);
-
-                const tdStatus = document.createElement('td');
-                if (userAns === undefined) {
-                    tdStatus.innerText = "لم يتم حلّه";
-                    tdStatus.style.color = "var(--text-light)";
-                } else {
-                    tdStatus.innerText = isCorrect ? "صحيحة ✓" : "خاطئة ✗";
-                    tdStatus.style.color = isCorrect ? "var(--success)" : "var(--danger)";
-                }
-                row.appendChild(tdStatus);
-
-                const tdCorrect = document.createElement('td');
-                tdCorrect.innerText = q.options[q.correct].substring(0, 35) + "...";
-                row.appendChild(tdCorrect);
-
-                tableBody.appendChild(row);
-            });
-
-            // Calculate percentage score metric values
-            let finalPercentageValue = Math.round((correctAnswersCount / questionBank.length) * 100);
-            document.getElementById('score-percentage-view').innerText = `${finalPercentageValue}%`;
-
-            const headline = document.getElementById('score-headline-msg');
-            if (finalPercentageValue >= 85) {
-                headline.innerText = "ممتاز ومؤهل بقوة للقبول الجامعي! (C1/B2)";
-                headline.style.color = "var(--success)";
-            } else if (finalPercentageValue >= 60) {
-                headline.innerText = "درجة جيدة ومقبولة، ننصح بمراجعة القواعد أكثر. (B1)";
-                headline.style.color = "var(--accent)";
-            } else {
-                headline.innerText = "النتيجة دون حد الكفاية المطلوب للجامعات. استمر في التدريب!";
-                headline.style.color = "var(--danger)";
-            }
-        }
-
-        // Full system reset framework
-        function rebootTestEnv() {
-            currentPointer = 1;
-            countdownSeconds = 155 * 60;
-            userSelections = {};
-            document.getElementById('essay-input-box').value = "";
-            document.getElementById('essay-word-count').innerText = "0";
-            if (isAudioCapturing) handleMicToggle();
-            initiateCountdownClock();
-            refreshFrameDisplay();
-        }
-    </script>
 </body>
 </html>
